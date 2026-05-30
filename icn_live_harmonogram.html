@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICN LIVE harmonogram</title>
+  <style>
+    :root{
+      --bg:#050814; --card:#101827; --line:#273449; --text:#f8fafc; --muted:#9ca3af;
+      --gold:#facc15; --orange:#fb923c; --green:#22c55e; --lime:#84cc16; --blue:#38bdf8;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#172554 0,#050814 45%,#020617 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+    .wrap{max-width:980px;margin:auto;padding:14px}
+    header{text-align:center;padding:12px 0 8px}
+    .logo{font-size:56px;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:.9}
+    h1{margin:8px 0 4px;font-size:26px}
+    .sub{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
+    .card{background:rgba(16,24,39,.94);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+    .label{font-weight:800;color:var(--gold);font-size:14px}
+    .big{font-weight:900;font-size:19px;margin-top:5px}
+    .muted{color:var(--muted);font-size:14px;margin-top:4px}
+    .controls{display:grid;grid-template-columns:1fr 105px;gap:8px;margin-top:10px}
+    select,input,button{border-radius:12px;border:1px solid #475569;background:#0f172a;color:white;padding:10px;font-size:15px}
+    button{background:var(--gold);color:#111827;font-weight:900;border:none}
+    .list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+    .row{background:rgba(16,24,39,.9);border:1px solid var(--line);border-radius:15px;padding:11px;display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:start}
+    .time{font-weight:900;color:var(--gold);font-size:18px}
+    .name{font-weight:800}
+    .meta{font-size:13px;color:var(--muted);margin-top:4px}
+    .current{border-color:var(--lime);background:rgba(132,204,22,.18);box-shadow:0 0 0 1px rgba(132,204,22,.25)}
+    .mine{border-color:var(--gold);background:rgba(250,204,21,.13)}
+    .possible{border-color:var(--green);background:rgba(34,197,94,.13)}
+    .tag{font-size:11px;font-weight:900;border-radius:999px;padding:4px 7px;background:var(--lime);color:#102a0b}
+    .legend{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 22px}
+    @media(min-width:760px){.cards{grid-template-columns:1fr 1fr 1fr}.list{grid-template-columns:1fr 1fr}.logo{font-size:72px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">ICN</div>
+    <h1>LIVE harmonogram</h1>
+    <div class="sub">Mezinárodní MČR 2026 • Karlovy Vary</div>
+  </header>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">🟢 Právě probíhá</div>
+      <div class="big" id="currentBox">–</div>
+      <div class="muted" id="currentEnd">–</div>
+    </div>
+    <div class="card">
+      <div class="label" style="color:var(--orange)">💪 Další tvoje kategorie</div>
+      <div class="big" id="nextMine">–</div>
+      <div class="muted" id="countdown">–</div>
+    </div>
+    <div class="card">
+      <div class="label" style="color:var(--green)">🏆 Konec soutěže</div>
+      <div class="big" id="finish">–</div>
+      <div class="muted">orientační čas</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Nastavení aktuálního bodu</div>
+    <div class="controls">
+      <select id="anchorSelect"></select>
+      <input id="anchorTime" value="15:38" placeholder="15:38"/>
+    </div>
+    <button style="width:100%;margin-top:8px" id="nowBtn">Vybraná kategorie začíná TEĎ</button>
+    <div class="muted">Klikni na kategorii dole, nebo vyber kategorii a zadej skutečný čas startu. Zbytek se přepočítá automaticky.</div>
+  </div>
+
+  <div class="list" id="list"></div>
+  <div class="legend">Žlutě = tvoje starty • zeleně = možné overall při výhře • limetkově = aktuálně probíhá</div>
+</div>
+
+<script>
+const base = [
+  ['1','Ms. Figure Novice + Ms. Figure Open',8],
+  ['2','Men’s Fitness Model Open',8],
+  ['3','Ms. Classic Figure',8],
+  ['4','Ms. Bodybuilding',8],
+  ['5','Men’s Physique Teens 15–18 + Juniors -23',8],
+  ['6','Ms. Wellness Novice',8],
+  ['7','Men’s Physique Rookie',12],
+  ['8','Ms. Wellness Open',8],
+  ['9','Men’s Physique Novice',12],
+  ['10','Ms. Bikini Model Juniors -23',12],
+  ['11','Men’s Physique Open + Men’s Physique 40+',12],
+  ['MP O','Men’s Physique – ABSOLUTNÍ VÍTĚZ',10],
+  ['12','Ms. Bikini Model Rookie',12],
+  ['13','Men’s Athletic HW -3 kg + Men’s Athletic HW -6 kg',8],
+  ['14','Ms. Bikini Model Novice',8],
+  ['15','Men’s Classic Physique Rookie',12],
+  ['16','Ms. Bikini Model Open',8],
+  ['17','Men’s Classic Physique Novice',12],
+  ['18','Ms. Bikini Model 40+',12],
+  ['19','Men’s Classic Physique Open',15,'mine'],
+  ['BM O','Ms. Bikini Model – ABSOLUTNÍ VÍTĚZ',10],
+  ['CP O','Men’s Classic Physique – ABSOLUTNÍ VÍTĚZ',10,'possible'],
+  ['20','Ms. Fitness Model Novice',12],
+  ['21','Men’s Bodybuilding 40+',12,'mine'],
+  ['22','Ms. Fitness Model Open',12],
+  ['23','Men’s Bodybuilding 50+',8],
+  ['24','Ms. Sport Model Novice',12],
+  ['25','Men’s Bodybuilding Teens 15–18',12],
+  ['26','Ms. Sport Model Open',12],
+  ['27','Men’s Bodybuilding Juniors -23',12],
+  ['28','Ms. Sport Model 40+',12],
+  ['29','Men’s Bodybuilding Rookie',12],
+  ['30','Ms. Swimsuit (4)',12],
+  ['31','Men’s Bodybuilding Novice (8)',15,'mine'],
+  ['32','Ms. Gym Model',8],
+  ['33','Men’s Bodybuilding Open (8)',12],
+  ['34','Ms. Runway',12],
+  ['BB O','Men’s Bodybuilding – ABSOLUTNÍ VÍTĚZ',10,'possible'],
+];
+let anchorIndex = 7;
+
+const sel = document.getElementById('anchorSelect');
+base.forEach((x,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=`${x[0]}) ${x[1]}`; sel.appendChild(o); });
+sel.value = anchorIndex;
+
+function toMin(t){ const [h,m]=t.split(':').map(Number); return h*60+m; }
+function toTime(min){ min=((min%1440)+1440)%1440; return String(Math.floor(min/60)).padStart(2,'0')+':'+String(min%60).padStart(2,'0'); }
+function diffText(target, now){ const d=target-now, a=Math.abs(d); return (d<0?'-':'')+Math.floor(a/60)+'h '+String(a%60).padStart(2,'0')+'m'; }
+
+function build(){
+  anchorIndex = Number(sel.value);
+  const anchorTime = toMin(document.getElementById('anchorTime').value || '15:38');
+  const arr = base.map((x,i)=>({n:x[0],name:x[1],duration:x[2],type:x[3]||'',index:i}));
+  let s = anchorTime;
+  for(let i=anchorIndex;i<arr.length;i++){ arr[i].start=s; s+=arr[i].duration; arr[i].end=s; }
+  s = anchorTime;
+  for(let i=anchorIndex-1;i>=0;i--){ s-=arr[i].duration; arr[i].start=s; arr[i].end=s+arr[i].duration; }
+  return arr;
+}
+
+function render(){
+  const arr = build();
+  const d = new Date(), now = d.getHours()*60+d.getMinutes();
+  let current = arr.find(x=>now>=x.start && now<x.end) || arr[anchorIndex];
+  let nextMine = arr.find(x=>(x.type==='mine'||x.type==='possible') && x.start>=now);
+  document.getElementById('currentBox').textContent = `${toTime(current.start)} • ${current.name}`;
+  document.getElementById('currentEnd').textContent = `konec cca ${toTime(current.end)}`;
+  document.getElementById('nextMine').textContent = nextMine ? `${toTime(nextMine.start)} • ${nextMine.name}` : 'Už žádná';
+  document.getElementById('countdown').textContent = nextMine ? `zbývá ${diffText(nextMine.start, now)}` : '';
+  document.getElementById('finish').textContent = toTime(arr[arr.length-1].end);
+
+  const list = document.getElementById('list'); list.innerHTML='';
+  arr.forEach((x,i)=>{
+    const row=document.createElement('div');
+    row.className='row '+(x.index===current.index?'current ':x.type==='mine'?'mine ':x.type==='possible'?'possible ':'');
+    row.onclick=()=>{ sel.value=i; document.getElementById('anchorTime').value=toTime(x.start); render(); };
+    row.innerHTML=`<div class="time">${toTime(x.start)}</div><div><div class="name">${x.n}) ${x.name}</div><div class="meta">trvání ${x.duration} min • konec ${toTime(x.end)}</div></div>${x.index===current.index?'<div class="tag">TEĎ</div>':''}`;
+    list.appendChild(row);
+  });
+}
+document.getElementById('anchorTime').addEventListener('input',render);
+sel.addEventListener('change',render);
+document.getElementById('nowBtn').onclick=()=>{ const d=new Date(); document.getElementById('anchorTime').value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); render(); };
+render(); setInterval(render,30000);
+</script>
+</body>
+</html>
