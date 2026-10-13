@@ -1,402 +1,67 @@
 <!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ICN LIVE harmonogram</title>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ICN LIVE harmonogram</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
-
-:root{--bg:#050814;--card:#101827;--line:#273449;--text:#f8fafc;--muted:#9ca3af;--gold:#facc15;--green:#22c55e;--lime:#84cc16;--blue:#38bdf8;--red:#ef4444;--orange:#fb923c}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#172554 0,#050814 45%,#020617 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-.wrap{max-width:1180px;margin:auto;padding:14px}
-header{text-align:center;padding:12px 0 8px}
-.logo{font-size:58px;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:.9}
-h1{margin:8px 0 4px;font-size:26px}.sub{color:var(--muted)}
-.cards{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
-.card{background:rgba(16,24,39,.94);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.28)}
-.label{font-weight:800;color:var(--gold);font-size:14px}.big{font-weight:900;font-size:19px;margin-top:5px}.muted{color:var(--muted);font-size:14px;margin-top:4px}.small{font-size:12px;color:#cbd5e1}
-.list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
-.row{background:rgba(16,24,39,.9);border:1px solid var(--line);border-radius:15px;padding:11px;display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:start}
-.time{font-weight:900;color:var(--gold);font-size:18px}.name{font-weight:800}.meta{font-size:13px;color:var(--muted);margin-top:4px}
-.current{border-color:var(--lime);background:rgba(132,204,22,.18);box-shadow:0 0 0 1px rgba(132,204,22,.25)}
-.next{border-color:var(--blue);background:rgba(56,189,248,.13)}.overall{border-color:var(--green);background:rgba(34,197,94,.13)}
-.tag{font-size:11px;font-weight:900;border-radius:999px;padding:4px 7px;background:var(--lime);color:#102a0b}.tagNext{background:var(--blue);color:#062434}.tagOverall{background:var(--green);color:#052e16}
-.legend{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 22px}.adminLink{text-align:center;margin:10px 0}.adminLink a{color:#94a3b8;text-decoration:none;font-size:12px}
-select,input,button,textarea{border-radius:12px;border:1px solid #475569;background:#0f172a;color:white;padding:10px;font-size:15px;width:100%}
-button{background:var(--gold);color:#111827;font-weight:900;border:none}.secondary{background:#1e293b;color:white;border:1px solid #475569}.danger{background:var(--red);color:white}.ok{background:var(--green);color:#052e16}.blue{background:var(--blue);color:#062434}
-.grid{display:grid;grid-template-columns:1fr;gap:8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid4{display:grid;grid-template-columns:1fr;gap:8px}
-.hidden{display:none}
-.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:10px}
-table{width:100%;border-collapse:collapse;min-width:820px;table-layout:fixed}
-th,td{border-bottom:1px solid #263244;padding:8px;text-align:left;font-size:13px}
-th{background:#111827;color:var(--gold)}
-td input{padding:6px;border-radius:8px;font-size:13px}
-.col-num{width:72px}.col-name{width:auto}.col-count{width:110px}.col-overall{width:86px}.col-duration{width:90px}
-.durationValue{display:inline-block;width:100%;padding:7px 8px;border-radius:8px;background:#111827;border:1px solid #334155;color:#cbd5e1;text-align:center;font-weight:800}
-.history{display:grid;gap:6px;margin-top:10px}.histItem{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:8px;font-size:13px}
-.qrBox{display:flex;align-items:center;justify-content:center;background:white;padding:12px;border-radius:16px;margin-top:10px}
-@media(min-width:760px){.cards{grid-template-columns:1fr 1fr 1fr}.list{grid-template-columns:1fr 1fr}.logo{font-size:76px}.grid{grid-template-columns:1fr 1fr 1fr}.grid4{grid-template-columns:1fr 1fr 1fr 1fr}}
-
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
-  <div class="logo">ICN</div>
-  <h1 id="pageTitle">LIVE harmonogram</h1>
-  <div class="sub" id="pageSub">Mezinárodní MČR 2026 • Karlovy Vary</div>
-</header>
-
-<div id="publicView">
-  <div class="cards">
-    <div class="card"><div class="label">🟢 Právě probíhá</div><div class="big" id="currentBox">–</div><div class="muted" id="currentEnd">–</div></div>
-    <div class="card"><div class="label" style="color:var(--blue)">🔵 Následuje další kategorie</div><div class="big" id="nextCategory">–</div><div class="muted" id="nextCountdown">–</div></div>
-    <div class="card"><div class="label" style="color:var(--green)">🏆 Konec soutěže</div><div class="big" id="finish">–</div><div class="muted" id="updated">–</div></div>
-  </div>
-  <div class="list" id="list"></div>
-  <div class="legend">Limetkově = právě probíhá • modře = následující kategorie • zeleně = overall</div>
-  <div class="adminLink"><a href="?admin=1">Admin</a></div>
-</div>
-
-<div id="adminView" class="hidden">
-  <div class="legend"><a href="./" style="color:#93c5fd">← veřejný harmonogram</a></div>
-  <div id="loginBox" class="card">
-    <div class="label">Admin přihlášení</div>
-    <div class="grid2"><input id="pass" type="password" placeholder="Heslo"><button id="loginBtn">Odemknout</button></div>
-    <div id="msg" class="muted">Admin rozhraní je oddělené od veřejného harmonogramu.</div>
-  </div>
-
-  <div id="adminPanel" class="hidden">
-    <div class="card">
-      <div class="label">1) Import soutěže z Excelu</div>
-      <input id="excelFile" type="file" accept=".xlsx,.xls">
-      <button id="importExcelBtn" class="ok" style="margin-top:8px">Načíst Excel</button>
-      <div class="muted">Sloupce v listu Kategorie: <b>Kategorie</b>, <b>Název</b>, <b>Počet závodníků</b>, volitelně <b>Overall</b>.</div>
-      <div id="importSummary" class="small"></div>
-    </div>
-
-    <div class="card">
-      <div class="label">2) Nastavení času soutěže a pravidel</div>
-      <div class="grid4">
-        <div><div class="small">Start soutěže</div><input id="competitionStart" type="time" step="60"></div>
-        <div><div class="small">1–3 závodníci</div><input id="ruleSmall" type="number" min="1"></div>
-        <div><div class="small">4–8 závodníků</div><input id="ruleMedium" type="number" min="1"></div>
-        <div><div class="small">9+ závodníků</div><input id="ruleLarge" type="number" min="1"></div>
-      </div>
-      <div class="grid2" style="margin-top:8px"><div><div class="small">Overall</div><input id="ruleOverall" type="number" min="1"></div><button id="applyRules" class="ok">Přepočítat délky</button></div>
-    </div>
-
-    <div class="card">
-      <div class="label">3) Live řízení soutěže</div>
-      <div class="grid"><select id="anchorSelect"></select><input id="anchorTime" type="time" step="60"><button id="nowBtn">Vybraná kategorie začíná TEĎ</button></div>
-      <div class="grid2" style="margin-top:8px"><button id="nextBtn" class="blue">Posunout na další kategorii TEĎ</button><button id="undoBtn" class="secondary">Vrátit poslední změnu</button></div>
-    </div>
-
-    <div class="card">
-      <div class="label">4) Náhled a ruční úpravy kategorií</div>
-      <div class="muted">Délka je needitovatelná a mění se tlačítkem „Přepočítat délky“ podle počtu závodníků a pravidel.</div>
-      <div class="tableWrap"><table id="editTable"></table></div>
-    </div>
-
-    <div class="card">
-      <div class="label">5) QR / export / import</div>
-      <div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div>
-      <div id="qrBox" class="qrBox hidden"></div>
-      <textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea>
-      <div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div>
-      <div class="history" id="historyBox"></div>
-    </div>
-
-    <div class="list" id="adminList"></div>
-  </div>
-</div>
-</div>
-
+:root{--bg:#050814;--card:#101827;--line:#273449;--text:#f8fafc;--muted:#9ca3af;--gold:#facc15;--green:#22c55e;--lime:#84cc16;--blue:#38bdf8;--red:#ef4444}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#172554 0,#050814 45%,#020617 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}.wrap{max-width:1180px;margin:auto;padding:14px}header{text-align:center;padding:12px 0 8px}.logo{font-size:64px;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:.9}h1{margin:8px 0 4px;font-size:26px}.sub,.muted{color:var(--muted)}.muted{font-size:14px;margin-top:6px}.small{font-size:12px;color:#cbd5e1}.cards{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}.card{background:rgba(16,24,39,.94);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.28);margin-bottom:12px}.label{font-weight:800;color:var(--gold);font-size:14px}.big{font-weight:900;font-size:19px;margin-top:5px}.list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}.row{background:rgba(16,24,39,.9);border:1px solid var(--line);border-radius:15px;padding:11px;display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:start}.time{font-weight:900;color:var(--gold);font-size:18px}.name{font-weight:800}.meta{font-size:13px;color:var(--muted);margin-top:4px}.current{border-color:var(--lime);background:rgba(132,204,22,.18)}.next{border-color:var(--blue);background:rgba(56,189,248,.13)}.overall{border-color:var(--green);background:rgba(34,197,94,.13)}.tag{font-size:11px;font-weight:900;border-radius:999px;padding:4px 7px;background:var(--lime);color:#102a0b}.tagNext{background:var(--blue);color:#062434}.tagOverall{background:var(--green);color:#052e16}.legend{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 22px}.adminLink{text-align:center;margin:10px 0}.adminLink a{color:#94a3b8;text-decoration:none;font-size:12px}select,input,button,textarea{border-radius:12px;border:1px solid #475569;background:#0f172a;color:white;padding:10px;font-size:15px;width:100%}button{background:var(--gold);color:#111827;font-weight:900;border:none;cursor:pointer}.secondary{background:#1e293b;color:white;border:1px solid #475569}.danger{background:var(--red);color:white}.ok{background:var(--green);color:#052e16}.blue{background:var(--blue);color:#062434}.grid,.grid2,.grid4{display:grid;grid-template-columns:1fr;gap:8px}.grid2{grid-template-columns:1fr 1fr}.hidden{display:none!important}.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:10px}table{width:100%;border-collapse:collapse;min-width:820px;table-layout:fixed}th,td{border-bottom:1px solid #263244;padding:8px;text-align:left;font-size:13px}th{background:#111827;color:var(--gold)}td input{padding:6px;border-radius:8px;font-size:13px}.col-num{width:72px}.col-name{width:auto}.col-count{width:110px}.col-overall{width:86px}.col-duration{width:90px}.durationValue{display:inline-block;width:100%;padding:7px 8px;border-radius:8px;background:#111827;border:1px solid #334155;color:#cbd5e1;text-align:center;font-weight:800}.history{display:grid;gap:6px;margin-top:10px}.histItem{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:8px;font-size:13px}.qrBox{display:flex;align-items:center;justify-content:center;background:white;padding:12px;border-radius:16px;margin-top:10px}@media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}.list{grid-template-columns:1fr 1fr}.grid{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(4,1fr)}.logo{font-size:76px}}
+</style></head><body><div class="wrap"><header><div class="logo">ICN</div><h1 id="pageTitle">LIVE harmonogram</h1><div class="sub" id="pageSub"></div></header>
+<div id="publicView"><div class="cards"><div class="card"><div class="label">🟢 Právě probíhá</div><div class="big" id="currentBox">–</div><div class="muted" id="currentEnd">–</div></div><div class="card"><div class="label" style="color:var(--blue)">🔵 Následuje další kategorie</div><div class="big" id="nextCategory">–</div><div class="muted" id="nextCountdown">–</div></div><div class="card"><div class="label" style="color:var(--green)">🏆 Konec soutěže</div><div class="big" id="finish">–</div><div class="muted" id="updated">–</div></div></div><div class="list" id="list"></div><div class="legend">Limetkově = právě probíhá • modře = následující kategorie • zeleně = overall</div><div class="adminLink"><a href="?admin=1">Admin</a></div></div>
+<div id="adminView" class="hidden"><div class="legend"><a href="./" style="color:#93c5fd">← veřejný harmonogram</a></div><div id="loginBox" class="card"><div class="label">Admin přihlášení</div><div class="grid2"><input id="pass" type="password" placeholder="Heslo"><button id="loginBtn">Odemknout</button></div><div id="msg" class="muted">Admin rozhraní je oddělené od veřejného harmonogramu.</div></div>
+<div id="adminPanel" class="hidden"><div class="card"><div class="label">1) Import soutěže z Excelu</div><input id="excelFile" type="file" accept=".xlsx,.xls"><button id="importExcelBtn" class="ok" style="margin-top:8px">Načíst Excel</button><div class="muted">List <b>Kategorie</b>: Kategorie, Název, Počet závodníků, Overall. List <b>Informace</b>: Soutěž, Datum, Místo, Začátek soutěže.</div><div id="importSummary" class="small" role="status"></div></div>
+<div class="card"><div class="label">2) Informace o soutěži</div><div class="grid4"><label><span class="small">Název soutěže</span><input id="eventName"></label><label><span class="small">Datum</span><input id="eventDate" placeholder="17. 10. 2026"></label><label><span class="small">Místo</span><input id="eventPlace"></label><label><span class="small">Start soutěže</span><input id="competitionStart" type="time" step="60"></label></div><button id="saveEventBtn" class="ok" style="margin-top:8px">Uložit informace o soutěži</button></div>
+<div class="card"><div class="label">3) Nastavení délky kategorií</div><div class="grid4"><label><span class="small">1–3 závodníci</span><input id="ruleSmall" type="number" min="1"></label><label><span class="small">4–8 závodníků</span><input id="ruleMedium" type="number" min="1"></label><label><span class="small">9+ závodníků</span><input id="ruleLarge" type="number" min="1"></label><label><span class="small">Overall</span><input id="ruleOverall" type="number" min="1"></label></div><button id="applyRules" class="ok" style="margin-top:8px">Přepočítat délky</button></div>
+<div class="card"><div class="label">4) Live řízení soutěže</div><div class="grid"><select id="anchorSelect"></select><input id="anchorTime" type="time" step="60"><button id="nowBtn">Vybraná kategorie začíná TEĎ</button></div><div class="grid2" style="margin-top:8px"><button id="nextBtn" class="blue">Posunout na další kategorii TEĎ</button><button id="undoBtn" class="secondary">Vrátit poslední změnu</button></div></div>
+<div class="card"><div class="label">5) Náhled a ruční úpravy kategorií</div><div class="muted">Délka se mění tlačítkem „Přepočítat délky“.</div><div class="tableWrap"><table id="editTable"></table></div></div>
+<div class="card"><div class="label">6) QR / export / import</div><div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div><div id="qrBox" class="qrBox hidden"></div><textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea><div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div><div class="history" id="historyBox"></div></div><div class="list" id="adminList"></div></div></div></div>
 <script>
-
-const ADMIN_PASSWORD='adminRobert';
-const STORAGE_KEY='icnScheduleStateSplitV3';
+'use strict';
+const $=id=>document.getElementById(id), ADMIN_PASSWORD='adminRobert', STORAGE_KEY='icnScheduleStateSplitV3';
 const DEFAULT_RULES={small:8,medium:12,large:15,overall:10};
-
 const DEFAULT_BASE=[
-{n:'1',name:'Ms. Figure Novice + Ms. Figure Open',count:5},
-{n:'2',name:'Men’s Fitness Model Open',count:2},
-{n:'3',name:'Ms. Classic Figure',count:2},
-{n:'4',name:'Ms. Bodybuilding',count:3},
-{n:'5',name:'Men’s Physique Teens 15–18 + Juniors -23',count:4},
-{n:'6',name:'Ms. Wellness Novice',count:3},
-{n:'7',name:'Men’s Physique Rookie',count:4},
-{n:'8',name:'Ms. Wellness Open',count:3},
-{n:'9',name:'Men’s Physique Novice',count:6},
-{n:'10',name:'Ms. Bikini Model Juniors -23',count:6},
-{n:'11',name:'Men’s Physique Open + Men’s Physique 40+',count:6},
-{n:'MP O',name:'Men’s Physique – ABSOLUTNÍ VÍTĚZ',overall:true},
-{n:'12',name:'Ms. Bikini Model Rookie',count:4},
-{n:'13',name:'Men’s Athletic HW -3 kg + Men’s Athletic HW -6 kg',count:3},
-{n:'14',name:'Ms. Bikini Model Novice',count:3},
-{n:'15',name:'Men’s Classic Physique Rookie',count:6},
-{n:'16',name:'Ms. Bikini Model Open',count:3},
-{n:'17',name:'Men’s Classic Physique Novice',count:5},
-{n:'18',name:'Ms. Bikini Model 40+',count:5},
-{n:'19',name:'Men’s Classic Physique Open',count:9},
-{n:'BM O',name:'Ms. Bikini Model – ABSOLUTNÍ VÍTĚZ',overall:true},
-{n:'CP O',name:'Men’s Classic Physique – ABSOLUTNÍ VÍTĚZ',overall:true},
-{n:'20',name:'Ms. Fitness Model Novice',count:4},
-{n:'21',name:'Men’s Bodybuilding 40+',count:6},
-{n:'22',name:'Ms. Fitness Model Open',count:6},
-{n:'23',name:'Men’s Bodybuilding 50+',count:2},
-{n:'24',name:'Ms. Sport Model Novice',count:4},
-{n:'25',name:'Men’s Bodybuilding Teens 15–18',count:5},
-{n:'26',name:'Ms. Sport Model Open',count:6},
-{n:'27',name:'Men’s Bodybuilding Juniors -23',count:5},
-{n:'28',name:'Ms. Sport Model 40+',count:4},
-{n:'29',name:'Men’s Bodybuilding Rookie',count:5},
-{n:'30',name:'Ms. Swimsuit',count:4},
-{n:'31',name:'Men’s Bodybuilding Novice',count:8},
-{n:'32',name:'Ms. Gym Model',count:3},
-{n:'33',name:'Men’s Bodybuilding Open',count:8},
-{n:'34',name:'Ms. Runway',count:5},
-{n:'BB O',name:'Men’s Bodybuilding – ABSOLUTNÍ VÍTĚZ',overall:true}
-];
-
-function calcDuration(count,overall,rules){if(overall)return Number(rules.overall);if(Number(count)<=3)return Number(rules.small);if(Number(count)<=8)return Number(rules.medium);return Number(rules.large)}
-function defaultState(){return{competitionStart:'14:30',anchorIndex:0,anchorTime:'14:30',rules:{...DEFAULT_RULES},items:DEFAULT_BASE.map(it=>({...it,duration:calcDuration(it.count||0,it.overall,DEFAULT_RULES)})),updatedAt:null,history:[]}}
-function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||defaultState()}catch(e){return defaultState()}}
+['1','Ms. Figure Novice + Ms. Figure Open',5],['2','Men’s Fitness Model Open',2],['3','Ms. Classic Figure',2],['4','Ms. Bodybuilding',3],['5','Men’s Physique Teens 15–18 + Juniors -23',4],['6','Ms. Wellness Novice',3],['7','Men’s Physique Rookie',4],['8','Ms. Wellness Open',3],['9','Men’s Physique Novice',6],['10','Ms. Bikini Model Juniors -23',6],['11','Men’s Physique Open + Men’s Physique 40+',6],['MP O','Men’s Physique – ABSOLUTNÍ VÍTĚZ',0,true],['12','Ms. Bikini Model Rookie',4],['13','Men’s Athletic HW -3 kg + Men’s Athletic HW -6 kg',3],['14','Ms. Bikini Model Novice',3],['15','Men’s Classic Physique Rookie',6],['16','Ms. Bikini Model Open',3],['17','Men’s Classic Physique Novice',5],['18','Ms. Bikini Model 40+',5],['19','Men’s Classic Physique Open',9],['BM O','Ms. Bikini Model – ABSOLUTNÍ VÍTĚZ',0,true],['CP O','Men’s Classic Physique – ABSOLUTNÍ VÍTĚZ',0,true],['20','Ms. Fitness Model Novice',4],['21','Men’s Bodybuilding 40+',6],['22','Ms. Fitness Model Open',6],['23','Men’s Bodybuilding 50+',2],['24','Ms. Sport Model Novice',4],['25','Men’s Bodybuilding Teens 15–18',5],['26','Ms. Sport Model Open',6],['27','Men’s Bodybuilding Juniors -23',5],['28','Ms. Sport Model 40+',4],['29','Men’s Bodybuilding Rookie',5],['30','Ms. Swimsuit',4],['31','Men’s Bodybuilding Novice',8],['32','Ms. Gym Model',3],['33','Men’s Bodybuilding Open',8],['34','Ms. Runway',5],['BB O','Men’s Bodybuilding – ABSOLUTNÍ VÍTĚZ',0,true]
+].map(([n,name,count,overall=false])=>({n,name,count,overall}));
+const DEFAULT_EVENT={name:'Mezinárodní MČR 2026',date:'',place:'Karlovy Vary'};
+function calcDuration(count,overall,rules){return Number(overall?rules.overall:Number(count)<=3?rules.small:Number(count)<=8?rules.medium:rules.large)}
+function defaultState(){return{competitionStart:'14:30',anchorIndex:0,anchorTime:'14:30',rules:{...DEFAULT_RULES},items:DEFAULT_BASE.map(it=>({...it,duration:calcDuration(it.count,it.overall,DEFAULT_RULES)})),event:{...DEFAULT_EVENT},updatedAt:null,history:[]}}
+function loadState(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY));if(!s||!Array.isArray(s.items))return defaultState();s.event={...DEFAULT_EVENT,...(s.event||{})};s.rules={...DEFAULT_RULES,...(s.rules||{})};s.history=s.history||[];return s}catch(e){return defaultState()}}
 function saveState(s,log){if(log){s.history=s.history||[];s.history.unshift({time:new Date().toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'}),text:log});s.history=s.history.slice(0,20)}s.updatedAt=new Date().toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});localStorage.setItem(STORAGE_KEY,JSON.stringify(s))}
 function toMin(t){const p=String(t||'00:00').split(':').map(Number);return p[0]*60+p[1]}
-function toTime(min){min=((min%1440)+1440)%1440;return String(Math.floor(min/60)).padStart(2,'0')+':'+String(min%60).padStart(2,'0')}
+function toTime(m){m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
 function diffText(target,now){const d=target-now,a=Math.abs(d);return(d<0?'-':'')+Math.floor(a/60)+'h '+String(a%60).padStart(2,'0')+'m'}
-function buildSchedule(state){const arr=state.items.map((x,i)=>({...x,index:i}));let s=toMin(state.anchorTime);for(let i=state.anchorIndex;i<arr.length;i++){arr[i].start=s;s+=Number(arr[i].duration);arr[i].end=s}s=toMin(state.anchorTime);for(let i=state.anchorIndex-1;i>=0;i--){s-=Number(arr[i].duration);arr[i].start=s;arr[i].end=s+Number(arr[i].duration)}return arr}
-function getCurrentNext(arr){const d=new Date(),now=d.getHours()*60+d.getMinutes();const current=arr.find(x=>now>=x.start&&now<x.end)||arr[0];const next=arr.find(x=>x.start>=current.end)||null;return{current,next,now}}
-function renderCards(arr){const s=loadState(),g=getCurrentNext(arr),current=g.current,next=g.next,now=g.now;currentBox.textContent=`${toTime(current.start)} • ${current.name}`;currentEnd.textContent=`konec cca ${toTime(current.end)}`;nextCategory.textContent=next?`${toTime(next.start)} • ${next.name}`:'Už žádná';nextCountdown.textContent=next?`začne za ${diffText(next.start,now)}`:'';finish.textContent=toTime(arr[arr.length-1].end);updated.textContent=s.updatedAt?`Aktualizováno ${s.updatedAt}`:'orientační čas'}
-function renderList(arr,elementId,admin,onClick){const g=getCurrentNext(arr),current=g.current,next=g.next;const list=document.getElementById(elementId);list.innerHTML='';arr.forEach((x,i)=>{const row=document.createElement('div');const isCurrent=x.index===current.index;const isNext=next&&x.index===next.index;row.className='row '+(isCurrent?'current ':isNext?'next ':x.overall?'overall ':'');row.innerHTML=`<div class="time">${toTime(x.start)}</div><div><div class="name">${x.n}) ${x.name}</div><div class="meta">${x.count?x.count+' závodníků • ':''}trvání ${x.duration} min • konec ${toTime(x.end)}</div></div>${isCurrent?'<div class="tag">TEĎ</div>':isNext?'<div class="tag tagNext">DALŠÍ</div>':x.overall?'<div class="tag tagOverall">OVERALL</div>':''}`;if(admin&&onClick){row.onclick=()=>onClick(x,i)}list.appendChild(row)})}
-function normalizeBool(v){return String(v||'').trim().toLowerCase()}
-function isOverallValue(v){const x=normalizeBool(v);return x==='ano'||x==='yes'||x==='y'||x==='true'||x==='1'||x==='overall'||x==='a'}
-function applyImportedRows(rows){let items=[];for(const r of rows){const n=r['Kategorie']??r['Číslo']??r['Cislo']??r['number']??r['category'];const name=r['Název']??r['Nazev']??r['Název kategorie']??r['name'];const countVal=r['Počet závodníků']??r['Pocet zavodniku']??r['Počet']??r['Pocet']??r['competitors'];const overallVal=r['Overall']??r['overall'];if(!n||!name)continue;const overall=isOverallValue(overallVal)||isOverallValue(countVal);const count=overall?0:Number(countVal||0);items.push({n:String(n),name:String(name),count,overall,duration:0})}const s=loadState();s.items=items.map(it=>({...it,duration:calcDuration(it.count,it.overall,s.rules)}));s.anchorIndex=0;s.anchorTime=s.competitionStart;saveState(s,`Načten Excel/JSON: ${items.length} kategorií`);return items}
-
-
-let publicTimer = null;
-let previousState = null;
-
-function showPublic(){
-  document.getElementById('publicView').classList.remove('hidden');
-  document.getElementById('adminView').classList.add('hidden');
-  document.getElementById('pageTitle').textContent = 'LIVE harmonogram';
-  document.getElementById('pageSub').textContent = 'Mezinárodní MČR 2026 • Karlovy Vary';
+function buildSchedule(s){const arr=s.items.map((x,index)=>({...x,index}));if(!arr.length)return arr;const anchor=Math.min(Math.max(0,Number(s.anchorIndex)||0),arr.length-1);let t=toMin(s.anchorTime);for(let i=anchor;i<arr.length;i++){arr[i].start=t;t+=Number(arr[i].duration)||0;arr[i].end=t}t=toMin(s.anchorTime);for(let i=anchor-1;i>=0;i--){t-=Number(arr[i].duration)||0;arr[i].start=t;arr[i].end=t+Number(arr[i].duration||0)}return arr}
+function getCurrentNext(arr){const d=new Date(),now=d.getHours()*60+d.getMinutes();const current=arr.find(x=>now>=x.start&&now<x.end)||arr[0],next=current?arr.find(x=>x.start>=current.end&&x.index>current.index):null;return{current,next,now}}
+function renderHeader(){const e=loadState().event;const parts=[e.name,e.date,e.place].filter(Boolean);$('pageSub').textContent=parts.join(' • ')}
+function renderCards(arr){if(!arr.length){$('currentBox').textContent='Žádné kategorie';$('currentEnd').textContent='';$('nextCategory').textContent='–';$('nextCountdown').textContent='';$('finish').textContent='–';return}const s=loadState(),g=getCurrentNext(arr),c=g.current,n=g.next;$('currentBox').textContent=`${toTime(c.start)} • ${c.name}`;$('currentEnd').textContent=`konec cca ${toTime(c.end)}`;$('nextCategory').textContent=n?`${toTime(n.start)} • ${n.name}`:'Už žádná';$('nextCountdown').textContent=n?`začne za ${diffText(n.start,g.now)}`:'';$('finish').textContent=toTime(arr[arr.length-1].end);$('updated').textContent=s.updatedAt?`Aktualizováno ${s.updatedAt}`:'orientační čas'}
+function renderList(arr,id,admin,onClick){const {current,next}=getCurrentNext(arr),root=$(id);root.replaceChildren();arr.forEach((x,i)=>{const row=document.createElement('div'),isCurrent=current&&x.index===current.index,isNext=next&&x.index===next.index;row.className='row '+(isCurrent?'current':isNext?'next':x.overall?'overall':'');const time=document.createElement('div');time.className='time';time.textContent=toTime(x.start);const main=document.createElement('div'),name=document.createElement('div'),meta=document.createElement('div');name.className='name';name.textContent=`${x.n}) ${x.name}`;meta.className='meta';meta.textContent=`${x.count?x.count+' závodníků • ':''}trvání ${x.duration} min • konec ${toTime(x.end)}`;main.append(name,meta);row.append(time,main);if(isCurrent||isNext||x.overall){const tag=document.createElement('div');tag.className='tag '+(isNext?'tagNext':!isCurrent?'tagOverall':'');tag.textContent=isCurrent?'TEĎ':isNext?'DALŠÍ':'OVERALL';row.append(tag)}if(admin&&onClick)row.onclick=()=>onClick(x,i);root.append(row)})}
+function normalizeKey(v){return String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim()}
+function isOverallValue(v){return ['ano','yes','y','true','1','overall','a'].includes(normalizeKey(v))}
+function readField(row,keys){const entries=Object.entries(row),entry=entries.find(([key])=>keys.includes(normalizeKey(key)));return entry?entry[1]:undefined}
+function parseCategories(rows,rules){const items=[];for(const r of rows){const n=readField(r,['kategorie','cislo','number','category']),name=readField(r,['nazev','nazev kategorie','name']),countVal=readField(r,['pocet zavodniku','pocet','competitors']),overallVal=readField(r,['overall']);if(n===undefined||String(n).trim()===''||!String(name??'').trim())continue;const overall=isOverallValue(overallVal)||isOverallValue(countVal),count=overall?0:Number(countVal||0);if(!Number.isFinite(count)||count<0)throw Error('Neplatný počet závodníků u kategorie '+n);items.push({n:String(n),name:String(name),count,overall,duration:calcDuration(count,overall,rules)})}return items}
+function excelTime(v){if(typeof v==='number'){if(v>=0&&v<1)return toTime(Math.round(v*1440));return null}const str=String(v??'').trim();const m=str.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);if(!m)return null;const h=Number(m[1]),min=Number(m[2]);return h<24&&min<60?String(h).padStart(2,'0')+':'+String(min).padStart(2,'0'):null}
+function parseInfo(sheet){if(!sheet)return null;const rows=XLSX.utils.sheet_to_json(sheet,{header:1,defval:'',raw:false}),result={};for(const row of rows){const key=normalizeKey(row[0]),value=String(row[1]??'').trim();if(!key||!value)continue;if(key==='soutez'||key==='nazev souteze')result.name=value;else if(key==='datum')result.date=value;else if(key==='misto'||key==='misto konani')result.place=value;else if(key==='zacatek souteze'||key==='start souteze'){const time=excelTime(value);if(!time)throw Error('Neplatný čas začátku soutěže: '+value);result.start=time}}return result}
+function applyImportedRows(rows,info){const old=loadState(),items=parseCategories(rows,old.rules);if(!items.length)throw Error('V listu Kategorie nebyly nalezeny platné kategorie.');const s=loadState();s.items=items;if(info){s.event={...s.event,...Object.fromEntries(Object.entries(info).filter(([k])=>k!=='start'))};if(info.start)s.competitionStart=info.start}s.anchorIndex=0;s.anchorTime=s.competitionStart;saveState(s,`Načten Excel: ${items.length} kategorií${info?' + informace o soutěži':''}`);return items}
+let previousState=null;
+function renderPublic(){renderHeader();const arr=buildSchedule(loadState());renderCards(arr);renderList(arr,'list',false)}
+const isAdminPage=new URLSearchParams(location.search).get('admin')==='1';
+if(!isAdminPage){renderPublic();setInterval(renderPublic,30000)}else{$('publicView').classList.add('hidden');$('adminView').classList.remove('hidden');$('pageTitle').textContent='LIVE admin';renderHeader();initAdmin()}
+function initAdmin(){const sel=$('anchorSelect');function rebuildSelect(s){sel.replaceChildren();s.items.forEach((x,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${x.n}) ${x.name}`;sel.append(o)})}
+function fillAdmin(){const s=loadState();rebuildSelect(s);sel.value=String(s.anchorIndex);$('anchorTime').value=s.anchorTime;$('competitionStart').value=s.competitionStart;$('eventName').value=s.event.name||'';$('eventDate').value=s.event.date||'';$('eventPlace').value=s.event.place||'';for(const k of ['Small','Medium','Large','Overall'])$('rule'+k).value=s.rules[k.toLowerCase()];renderEditTable(s);renderHistory(s);renderHeader()}
+function saveFromAdmin(log){previousState=loadState();const s=loadState();s.anchorIndex=Number(sel.value)||0;s.anchorTime=$('anchorTime').value||s.anchorTime;s.competitionStart=$('competitionStart').value||s.competitionStart;s.event={name:$('eventName').value.trim(),date:$('eventDate').value.trim(),place:$('eventPlace').value.trim()};for(const k of ['Small','Medium','Large','Overall']){const v=Number($('rule'+k).value);if(!Number.isFinite(v)||v<1)throw Error('Neplatná délka kategorie');s.rules[k.toLowerCase()]=v}saveState(s,log);return s}
+function renderAdmin(){const s=loadState(),arr=buildSchedule(s);renderList(arr,'adminList',true,(x,i)=>{previousState=loadState();const st=loadState();st.anchorIndex=i;st.anchorTime=toTime(x.start);saveState(st,`${toTime(x.start)} - nastaveno: ${x.name}`);fillAdmin();renderAdmin()});renderEditTable(s);renderHistory(s);renderHeader()}
+function renderEditTable(s){const t=$('editTable');t.innerHTML='<colgroup><col class="col-num"><col class="col-name"><col class="col-count"><col class="col-overall"><col class="col-duration"></colgroup><tr><th>#</th><th>Název</th><th>Počet</th><th>Overall</th><th>Délka</th></tr>';s.items.forEach((it,i)=>{const tr=document.createElement('tr');for(const [field,type,value] of [['n','text',it.n],['name','text',it.name],['count','number',it.count],['overall','checkbox',it.overall]]){const td=document.createElement('td'),input=document.createElement('input');input.dataset.i=i;input.dataset.f=field;input.type=type;if(type==='checkbox')input.checked=Boolean(value);else input.value=value;input.onchange=()=>{previousState=loadState();const st=loadState(),v=field==='overall'?input.checked:field==='count'?Number(input.value):input.value;st.items[i][field]=v;saveState(st);fillAdmin();renderAdmin()};td.append(input);tr.append(td)}const td=document.createElement('td'),span=document.createElement('span');span.className='durationValue';span.textContent=it.duration+' min';td.append(span);tr.append(td);t.append(tr)})}
+function renderHistory(s){const root=$('historyBox');root.replaceChildren();for(const h of(s.history||[]).slice(0,10)){const el=document.createElement('div');el.className='histItem';el.textContent=`${h.time} — ${h.text}`;root.append(el)}if(!root.childNodes.length)root.textContent='Zatím žádná historie.'}
+function unlock(){$('loginBox').classList.add('hidden');$('adminPanel').classList.remove('hidden');sessionStorage.setItem('icnAdmin','true');fillAdmin();renderAdmin()}
+if(sessionStorage.getItem('icnAdmin')==='true')unlock();$('loginBtn').onclick=()=>{$('pass').value===ADMIN_PASSWORD?unlock():$('msg').textContent='Špatné heslo.'};
+$('nowBtn').onclick=()=>{const d=new Date();$('anchorTime').value=toTime(d.getHours()*60+d.getMinutes());saveFromAdmin(`Start: ${loadState().items[Number(sel.value)]?.name||''}`);renderAdmin()};
+$('nextBtn').onclick=()=>{previousState=loadState();const s=loadState();s.anchorIndex=Math.min(s.anchorIndex+1,s.items.length-1);s.anchorTime=new Date().toTimeString().slice(0,5);saveState(s,`Start: ${s.items[s.anchorIndex]?.name||''}`);fillAdmin();renderAdmin()};
+$('undoBtn').onclick=()=>{if(previousState){localStorage.setItem(STORAGE_KEY,JSON.stringify(previousState));previousState=null;fillAdmin();renderAdmin()}else alert('Není co vrátit v této relaci.')};
+$('saveEventBtn').onclick=()=>{const old=loadState(),s=saveFromAdmin('Upraveny informace o soutěži');if(old.anchorIndex===0&&old.anchorTime===old.competitionStart&&s.competitionStart!==old.competitionStart){s.anchorTime=s.competitionStart;saveState(s)}fillAdmin();renderAdmin()};
+$('applyRules').onclick=()=>{try{const s=saveFromAdmin();s.items=s.items.map(it=>({...it,duration:calcDuration(it.count,it.overall,s.rules)}));saveState(s,'Přepočítány délky podle pravidel');fillAdmin();renderAdmin()}catch(e){alert(e.message)}};
+$('exportBtn').onclick=()=>{$('jsonBox').value=JSON.stringify(loadState(),null,2)};
+$('importBtn').onclick=()=>{try{const obj=JSON.parse($('jsonBox').value);if(!Array.isArray(obj.items))throw Error('Chybí kategorie');previousState=loadState();saveState(obj,'Import JSON');fillAdmin();renderAdmin()}catch(e){alert('Neplatný JSON: '+e.message)}};
+$('resetBtn').onclick=()=>{if(confirm('Opravdu resetovat?')){previousState=loadState();localStorage.removeItem(STORAGE_KEY);fillAdmin();renderAdmin()}};
+sel.onchange=()=>{saveFromAdmin();renderAdmin()};$('anchorTime').onchange=()=>{saveFromAdmin();renderAdmin()};
+$('importExcelBtn').onclick=()=>{const file=$('excelFile').files[0];if(!file){alert('Vyber Excel soubor.');return}const reader=new FileReader();reader.onload=e=>{try{if(typeof XLSX==='undefined')throw Error('Není dostupná knihovna pro Excel. Zkontroluj připojení k internetu.');const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});const categorySheet=wb.SheetNames.find(n=>normalizeKey(n)==='kategorie')||wb.SheetNames[0];const infoSheet=wb.SheetNames.find(n=>normalizeKey(n)==='informace');if(!categorySheet)throw Error('Excel neobsahuje žádné listy.');const rows=XLSX.utils.sheet_to_json(wb.Sheets[categorySheet],{defval:''}),info=infoSheet?parseInfo(wb.Sheets[infoSheet]):null;const before=loadState(),items=applyImportedRows(rows,info);previousState=before;$('importSummary').textContent=`Načteno ${items.length} kategorií, Overall: ${items.filter(x=>x.overall).length}. ${infoSheet?'Informace o soutěži načteny.':'List Informace chybí – ponechány původní údaje.'}`;fillAdmin();renderAdmin()}catch(err){$('importSummary').textContent='Import selhal: '+err.message;alert('Import Excelu selhal: '+err.message)}};reader.onerror=()=>alert('Soubor nelze přečíst.');reader.readAsArrayBuffer(file)};
+$('qrBtn').onclick=()=>{const url=location.href.replace(/\?.*$/,'');const img=document.createElement('img');img.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url);img.width=220;img.height=220;img.alt='QR kód';$('qrBox').classList.remove('hidden');$('qrBox').replaceChildren(img)};
 }
-
-function showAdmin(){
-  document.getElementById('publicView').classList.add('hidden');
-  document.getElementById('adminView').classList.remove('hidden');
-  document.getElementById('pageTitle').textContent = 'LIVE admin';
-  document.getElementById('pageSub').innerHTML = '<a href="./" style="color:#93c5fd">← veřejný harmonogram</a>';
-}
-
-function renderPublic(){
-  const s = loadState(), arr = buildSchedule(s);
-  renderCards(arr);
-  renderList(arr,'list',false);
-}
-
-const isAdminPage = new URLSearchParams(location.search).get('admin') === '1';
-
-if (!isAdminPage) {
-  showPublic();
-  renderPublic();
-  publicTimer = setInterval(renderPublic, 30000);
-} else {
-  showAdmin();
-  initAdmin();
-}
-
-function initAdmin(){
-  const sel = document.getElementById('anchorSelect');
-
-  function rebuildSelect(){
-    sel.innerHTML='';
-    loadState().items.forEach((x,i)=>{
-      const o=document.createElement('option');
-      o.value=i;
-      o.textContent=`${x.n}) ${x.name}`;
-      sel.appendChild(o);
-    });
-  }
-
-  function fillAdmin(){
-    const s=loadState();
-    rebuildSelect();
-    sel.value=s.anchorIndex;
-    document.getElementById('anchorTime').value=s.anchorTime;
-    document.getElementById('competitionStart').value=s.competitionStart;
-    document.getElementById('ruleSmall').value=s.rules.small;
-    document.getElementById('ruleMedium').value=s.rules.medium;
-    document.getElementById('ruleLarge').value=s.rules.large;
-    document.getElementById('ruleOverall').value=s.rules.overall;
-    renderEditTable(s);
-    renderHistory(s);
-  }
-
-  function saveFromAdmin(log){
-    previousState=loadState();
-    const s=loadState();
-    s.anchorIndex=Number(sel.value);
-    s.anchorTime=document.getElementById('anchorTime').value;
-    s.competitionStart=document.getElementById('competitionStart').value;
-    s.rules={
-      small:Number(document.getElementById('ruleSmall').value),
-      medium:Number(document.getElementById('ruleMedium').value),
-      large:Number(document.getElementById('ruleLarge').value),
-      overall:Number(document.getElementById('ruleOverall').value)
-    };
-    saveState(s,log);
-    return s;
-  }
-
-  function renderAdmin(){
-    const s=loadState(), arr=buildSchedule(s);
-    renderList(arr,'adminList',true,(x,i)=>{
-      const st=loadState();
-      previousState=st;
-      st.anchorIndex=i;
-      st.anchorTime=toTime(x.start);
-      saveState(st,`${toTime(x.start)} - nastaveno: ${x.name}`);
-      fillAdmin();
-      renderAdmin();
-    });
-    renderEditTable(s);
-    renderHistory(s);
-  }
-
-  function renderEditTable(s){
-    const t=document.getElementById('editTable');
-    t.innerHTML='<colgroup><col class="col-num"><col class="col-name"><col class="col-count"><col class="col-overall"><col class="col-duration"></colgroup><tr><th>#</th><th>Název</th><th>Počet</th><th>Overall</th><th>Délka</th></tr>';
-    s.items.forEach((it,i)=>{
-      const tr=document.createElement('tr');
-      tr.innerHTML=`<td><input data-i="${i}" data-f="n" value="${it.n}"></td><td><input data-i="${i}" data-f="name" value="${it.name}"></td><td><input type="number" data-i="${i}" data-f="count" value="${it.count||0}"></td><td><input type="checkbox" data-i="${i}" data-f="overall" ${it.overall?'checked':''}></td><td><span class="durationValue">${it.duration} min</span></td>`;
-      t.appendChild(tr);
-    });
-    t.querySelectorAll('input').forEach(inp=>{
-      inp.onchange=()=>{
-        previousState=loadState();
-        const s=loadState();
-        const i=Number(inp.dataset.i), f=inp.dataset.f;
-        if(f==='overall')s.items[i][f]=inp.checked;
-        else if(f==='count')s.items[i][f]=Number(inp.value);
-        else s.items[i][f]=inp.value;
-        saveState(s);
-        fillAdmin();
-        renderAdmin();
-      };
-    });
-  }
-
-  function renderHistory(s){
-    document.getElementById('historyBox').innerHTML=(s.history||[]).slice(0,10).map(h=>`<div class="histItem"><b>${h.time}</b> — ${h.text}</div>`).join('')||'<div class="muted">Zatím žádná historie.</div>';
-  }
-
-  function unlock(){
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('adminPanel').classList.remove('hidden');
-    sessionStorage.setItem('icnAdmin','true');
-    fillAdmin();
-    renderAdmin();
-  }
-
-  if(sessionStorage.getItem('icnAdmin')==='true') unlock();
-
-  document.getElementById('loginBtn').onclick=()=>{
-    if(document.getElementById('pass').value===ADMIN_PASSWORD) unlock();
-    else document.getElementById('msg').textContent='Špatné heslo.';
-  };
-
-  document.getElementById('nowBtn').onclick=()=>{
-    const d=new Date();
-    document.getElementById('anchorTime').value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-    saveFromAdmin(`Start: ${loadState().items[Number(sel.value)].name}`);
-    renderAdmin();
-  };
-
-  document.getElementById('nextBtn').onclick=()=>{
-    previousState=loadState();
-    const s=loadState();
-    const next=Math.min(s.anchorIndex+1,s.items.length-1);
-    s.anchorIndex=next;
-    s.anchorTime=new Date().toTimeString().slice(0,5);
-    saveState(s,`Start: ${s.items[next].name}`);
-    fillAdmin();
-    renderAdmin();
-  };
-
-  document.getElementById('undoBtn').onclick=()=>{
-    if(previousState){
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(previousState));
-      previousState=null;
-      fillAdmin();
-      renderAdmin();
-    } else alert('Není co vrátit v této relaci.');
-  };
-
-  document.getElementById('applyRules').onclick=()=>{
-    const s=saveFromAdmin();
-    s.items=s.items.map(it=>({...it,duration:calcDuration(it.count||0,it.overall,s.rules)}));
-    saveState(s,'Přepočítány délky podle pravidel');
-    fillAdmin();
-    renderAdmin();
-  };
-
-  document.getElementById('exportBtn').onclick=()=>{
-    document.getElementById('jsonBox').value=JSON.stringify(loadState(),null,2);
-  };
-
-  document.getElementById('importBtn').onclick=()=>{
-    try{
-      previousState=loadState();
-      saveState(JSON.parse(document.getElementById('jsonBox').value),'Import JSON');
-      fillAdmin();
-      renderAdmin();
-    }catch(e){alert('Neplatný JSON')}
-  };
-
-  document.getElementById('resetBtn').onclick=()=>{
-    if(confirm('Opravdu resetovat?')){
-      previousState=loadState();
-      localStorage.removeItem(STORAGE_KEY);
-      fillAdmin();
-      renderAdmin();
-    }
-  };
-
-  sel.onchange=()=>{saveFromAdmin();renderAdmin()};
-  document.getElementById('anchorTime').oninput=()=>{saveFromAdmin();renderAdmin()};
-
-  document.getElementById('importExcelBtn').onclick=()=>{
-    const file=document.getElementById('excelFile').files[0];
-    if(!file){alert('Vyber Excel soubor.');return}
-    const reader=new FileReader();
-    reader.onload=e=>{
-      previousState=loadState();
-      const data=new Uint8Array(e.target.result);
-      const wb=XLSX.read(data,{type:'array'});
-      const sheetName=wb.SheetNames.includes('Kategorie')?'Kategorie':wb.SheetNames[0];
-      const rows=XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{defval:''});
-      const items=applyImportedRows(rows);
-      document.getElementById('importSummary').textContent=`Načteno ${items.length} kategorií, overall: ${items.filter(x=>x.overall).length}`;
-      fillAdmin();
-      renderAdmin();
-    };
-    reader.readAsArrayBuffer(file);
-  };
-
-  document.getElementById('qrBtn').onclick=()=>{
-    const url=location.href.replace(/\?.*$/,'');
-    const img=`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`;
-    const qrBox=document.getElementById('qrBox');
-    qrBox.classList.remove('hidden');
-    qrBox.innerHTML=`<img src="${img}" width="220" height="220" alt="QR kód">`;
-  };
-}
-</script>
-</body>
-</html>
+</script></body></html>
