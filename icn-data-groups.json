@@ -1,0 +1,1885 @@
+{
+  "roster": [
+    {
+      "category": "Men's Physique Teenage",
+      "number": "2",
+      "name": "Samuel Čaník"
+    },
+    {
+      "category": "Men's Physique 23",
+      "number": "2",
+      "name": "Samuel Čaník"
+    },
+    {
+      "category": "Men's Physique 23",
+      "number": "21",
+      "name": "Béla Toth"
+    },
+    {
+      "category": "Men's Physique 23",
+      "number": "25",
+      "name": "Alex Kopiecki"
+    },
+    {
+      "category": "Ms Figure Open",
+      "number": "1",
+      "name": "Martina Žižková Popilková"
+    },
+    {
+      "category": "Ms Classic Figure Open",
+      "number": "1",
+      "name": "Martina Žižková Popilková"
+    },
+    {
+      "category": "Ms Classic Figure Open",
+      "number": "3",
+      "name": "Lenny Kruseova"
+    },
+    {
+      "category": "Ms Classic Figure Open",
+      "number": "4",
+      "name": "Martina Durnová"
+    },
+    {
+      "category": "Men's Physique Rookie",
+      "number": "6",
+      "name": "Marian Kasaj"
+    },
+    {
+      "category": "Men's Physique Rookie",
+      "number": "7",
+      "name": "Dominik Svoboda"
+    },
+    {
+      "category": "Men's Physique Rookie",
+      "number": "8",
+      "name": "Tomasz Sadlak"
+    },
+    {
+      "category": "Men's Physique Rookie",
+      "number": "9",
+      "name": "Denis Matys"
+    },
+    {
+      "category": "Ms Wellness Open",
+      "number": "5",
+      "name": "Kateřina Gammelová"
+    },
+    {
+      "category": "Men's Physique Novice",
+      "number": "8",
+      "name": "Tomasz Sadlak"
+    },
+    {
+      "category": "Men's Physique Novice",
+      "number": "9",
+      "name": "Denis Matys"
+    },
+    {
+      "category": "Men's Physique Novice",
+      "number": "11",
+      "name": "Marek Vanda"
+    },
+    {
+      "category": "Men's Physique Novice",
+      "number": "12",
+      "name": "Michal Šimáček"
+    },
+    {
+      "category": "Men's Physique Novice",
+      "number": "28",
+      "name": "Jonáš Pígl"
+    },
+    {
+      "category": "Ms Bikini Teenage",
+      "number": "10",
+      "name": "Eliška Šenkeříková"
+    },
+    {
+      "category": "Ms Bikini 23",
+      "number": "10",
+      "name": "Eliška Šenkeříková"
+    },
+    {
+      "category": "Ms Bikini 23",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Bikini 23",
+      "number": "15",
+      "name": "Nela Černostová"
+    },
+    {
+      "category": "Ms Bikini 23",
+      "number": "16",
+      "name": "Marija Stanislavska"
+    },
+    {
+      "category": "Men's Physique Open",
+      "number": "8",
+      "name": "Tomasz Sadlak"
+    },
+    {
+      "category": "Men's Physique Open",
+      "number": "9",
+      "name": "Denis Matys"
+    },
+    {
+      "category": "Men's Physique Open",
+      "number": "12",
+      "name": "Michal Šimáček"
+    },
+    {
+      "category": "Men's Physique Open",
+      "number": "17",
+      "name": "Tomáš Werner"
+    },
+    {
+      "category": "Ms Bikini Rookie",
+      "number": "5",
+      "name": "Kateřina Gammelová"
+    },
+    {
+      "category": "Ms Bikini Rookie",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Bikini Rookie",
+      "number": "18",
+      "name": "Monika Schwarczová"
+    },
+    {
+      "category": "Men's Athletic HW-3",
+      "number": "6",
+      "name": "Marian Kasaj"
+    },
+    {
+      "category": "Men's Athletic HW-3",
+      "number": "20",
+      "name": "Adam Komínek"
+    },
+    {
+      "category": "Men's Athletic HW-6",
+      "number": "6",
+      "name": "Marian Kasaj"
+    },
+    {
+      "category": "Men's Athletic HW-6",
+      "number": "20",
+      "name": "Adam Komínek"
+    },
+    {
+      "category": "Ms Bikini Novice",
+      "number": "5",
+      "name": "Kateřina Gammelová"
+    },
+    {
+      "category": "Ms Bikini Novice",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Bikini Novice",
+      "number": "16",
+      "name": "Marija Stanislavska"
+    },
+    {
+      "category": "Ms Bikini Novice",
+      "number": "19",
+      "name": "Kateřina Kunštová"
+    },
+    {
+      "category": "Men's Classic Physique 23",
+      "number": "21",
+      "name": "Béla Toth"
+    },
+    {
+      "category": "Men's Classic Physique 23",
+      "number": "22",
+      "name": "Josef Musil"
+    },
+    {
+      "category": "Men's Classic Physique 23",
+      "number": "23",
+      "name": "Daniel Havelka"
+    },
+    {
+      "category": "Men's Classic Physique 23",
+      "number": "24",
+      "name": "Ondřej Zetek"
+    },
+    {
+      "category": "Men's Classic Physique 23",
+      "number": "25",
+      "name": "Alex Kopiecki"
+    },
+    {
+      "category": "Ms Bikini Open",
+      "number": "5",
+      "name": "Kateřina Gammelová"
+    },
+    {
+      "category": "Ms Bikini Open",
+      "number": "15",
+      "name": "Nela Černostová"
+    },
+    {
+      "category": "Ms Bikini Open",
+      "number": "19",
+      "name": "Kateřina Kunštová"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "17",
+      "name": "Tomáš Werner"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "23",
+      "name": "Daniel Havelka"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "24",
+      "name": "Ondřej Zetek"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "25",
+      "name": "Alex Kopiecki"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "27",
+      "name": "BartŁomiej Pobielajew"
+    },
+    {
+      "category": "Men's Classic Physique Rookie",
+      "number": "28",
+      "name": "Jonáš Pígl"
+    },
+    {
+      "category": "Ms Bikini 40+",
+      "number": "18",
+      "name": "Monika Schwarczová"
+    },
+    {
+      "category": "Ms Bikini 40+",
+      "number": "19",
+      "name": "Kateřina Kunštová"
+    },
+    {
+      "category": "Ms Bikini 40+",
+      "number": "26",
+      "name": "Karolína Semecká"
+    },
+    {
+      "category": "Men's Classic Physique Novice",
+      "number": "22",
+      "name": "Josef Musil"
+    },
+    {
+      "category": "Men's Classic Physique Novice",
+      "number": "24",
+      "name": "Ondřej Zetek"
+    },
+    {
+      "category": "Men's Classic Physique Novice",
+      "number": "27",
+      "name": "BartŁomiej Pobielajew"
+    },
+    {
+      "category": "Men's Classic Physique Novice",
+      "number": "30",
+      "name": "Richie Czabala"
+    },
+    {
+      "category": "Men's Classic Physique Novice",
+      "number": "31",
+      "name": "Radek Chlapec"
+    },
+    {
+      "category": "Men's Classic Physique Open",
+      "number": "17",
+      "name": "Tomáš Werner"
+    },
+    {
+      "category": "Men's Classic Physique Open",
+      "number": "22",
+      "name": "Josef Musil"
+    },
+    {
+      "category": "Men's Classic Physique Open",
+      "number": "27",
+      "name": "BartŁomiej Pobielajew"
+    },
+    {
+      "category": "Men's Classic Physique Open",
+      "number": "31",
+      "name": "Radek Chlapec"
+    },
+    {
+      "category": "Ms FitnessModel Novice",
+      "number": "29",
+      "name": "Martina Novotná"
+    },
+    {
+      "category": "Ms FitnessModel Open",
+      "number": "29",
+      "name": "Martina Novotná"
+    },
+    {
+      "category": "Ms FitnessModel Open",
+      "number": "36",
+      "name": "Radka Čejková"
+    },
+    {
+      "category": "Ms Sports Model Novice",
+      "number": "4",
+      "name": "Martina Durnová"
+    },
+    {
+      "category": "Ms Sports Model Novice",
+      "number": "32",
+      "name": "Lucie Kinc"
+    },
+    {
+      "category": "Men's Bodybuilding 40+",
+      "number": "33",
+      "name": "Ivo Miler"
+    },
+    {
+      "category": "Men's Bodybuilding 40+",
+      "number": "34",
+      "name": "Vladislav Růžička"
+    },
+    {
+      "category": "Men's Bodybuilding 40+",
+      "number": "35",
+      "name": "Roman Kawulok"
+    },
+    {
+      "category": "Ms Sports Model Open",
+      "number": "4",
+      "name": "Martina Durnová"
+    },
+    {
+      "category": "Ms Sports Model Open",
+      "number": "36",
+      "name": "Radka Čejková"
+    },
+    {
+      "category": "Ms Sports Model 40+",
+      "number": "4",
+      "name": "Martina Durnová"
+    },
+    {
+      "category": "Ms Sports Model 40+",
+      "number": "36",
+      "name": "Radka Čejková"
+    },
+    {
+      "category": "Men's Bodybuilding Teenage",
+      "number": "2",
+      "name": "Samuel Čaník"
+    },
+    {
+      "category": "Men's Bodybuilding Teenage",
+      "number": "37",
+      "name": "Lukáš Skupien"
+    },
+    {
+      "category": "Men's Bodybuilding Teenage",
+      "number": "38",
+      "name": "David Vavrys"
+    },
+    {
+      "category": "Men's Bodybuilding 23",
+      "number": "22",
+      "name": "Josef Musil"
+    },
+    {
+      "category": "Ms Swimsuit Open",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Swimsuit Open",
+      "number": "18",
+      "name": "Monika Schwarczová"
+    },
+    {
+      "category": "Ms Swimsuit Open",
+      "number": "26",
+      "name": "Karolína Semecká"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "20",
+      "name": "Adam Komínek"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "30",
+      "name": "Richie Czabala"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "37",
+      "name": "Lukáš Skupien"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "38",
+      "name": "David Vavrys"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "39",
+      "name": "Dominik Jansa"
+    },
+    {
+      "category": "Men's Bodybuilding Rookie",
+      "number": "40",
+      "name": "Daniel Svatoň"
+    },
+    {
+      "category": "Ms Gym Model",
+      "number": "13",
+      "name": "Klára Pazderová"
+    },
+    {
+      "category": "Ms Gym Model",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Gym Model",
+      "number": "32",
+      "name": "Lucie Kinc"
+    },
+    {
+      "category": "Ms Gym Model",
+      "number": "41",
+      "name": "Kristýna Dubcová"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "11",
+      "name": "Marek Vanda"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "22",
+      "name": "Josef Musil"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "30",
+      "name": "Richie Czabala"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "35",
+      "name": "Roman Kawulok"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "39",
+      "name": "Dominik Jansa"
+    },
+    {
+      "category": "Men's Bodybuilding Novice",
+      "number": "40",
+      "name": "Daniel Svatoň"
+    },
+    {
+      "category": "Ms Runway",
+      "number": "13",
+      "name": "Klára Pazderová"
+    },
+    {
+      "category": "Ms Runway",
+      "number": "14",
+      "name": "Markéta Jílková"
+    },
+    {
+      "category": "Ms Runway",
+      "number": "18",
+      "name": "Monika Schwarczová"
+    },
+    {
+      "category": "Ms Runway",
+      "number": "41",
+      "name": "Kristýna Dubcová"
+    },
+    {
+      "category": "Men's Bodybuilding Open",
+      "number": "30",
+      "name": "Richie Czabala"
+    },
+    {
+      "category": "Men's Bodybuilding Open",
+      "number": "33",
+      "name": "Ivo Miler"
+    },
+    {
+      "category": "Men's Bodybuilding Open",
+      "number": "34",
+      "name": "Vladislav Růžička"
+    },
+    {
+      "category": "Men's Bodybuilding Open",
+      "number": "39",
+      "name": "Dominik Jansa"
+    }
+  ],
+  "items": [
+    {
+      "n": "1",
+      "name": "Men´s Physique 15-18 + Men´s Physique Juniors -23",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "2",
+          "name": "Samuel Čaník"
+        },
+        {
+          "number": "21",
+          "name": "Béla Toth"
+        },
+        {
+          "number": "25",
+          "name": "Alex Kopiecki"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Physique 15-18",
+          "rosterCategory": "Men's Physique Teenage",
+          "competitors": [
+            {
+              "number": "2",
+              "name": "Samuel Čaník"
+            }
+          ]
+        },
+        {
+          "name": "Men´s Physique Juniors -23",
+          "rosterCategory": "Men's Physique 23",
+          "competitors": [
+            {
+              "number": "2",
+              "name": "Samuel Čaník"
+            },
+            {
+              "number": "21",
+              "name": "Béla Toth"
+            },
+            {
+              "number": "25",
+              "name": "Alex Kopiecki"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "2",
+      "name": "Ms. Figure Open + Ms. Classic Figure Open",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "1",
+          "name": "Martina Žižková Popilková"
+        },
+        {
+          "number": "3",
+          "name": "Lenny Kruseova"
+        },
+        {
+          "number": "4",
+          "name": "Martina Durnová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Figure Open",
+          "rosterCategory": "Ms Figure Open",
+          "competitors": [
+            {
+              "number": "1",
+              "name": "Martina Žižková Popilková"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Classic Figure Open",
+          "rosterCategory": "Ms Classic Figure Open",
+          "competitors": [
+            {
+              "number": "1",
+              "name": "Martina Žižková Popilková"
+            },
+            {
+              "number": "3",
+              "name": "Lenny Kruseova"
+            },
+            {
+              "number": "4",
+              "name": "Martina Durnová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "3",
+      "name": "Men´s Physique Rookie",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "6",
+          "name": "Marian Kasaj"
+        },
+        {
+          "number": "7",
+          "name": "Dominik Svoboda"
+        },
+        {
+          "number": "8",
+          "name": "Tomasz Sadlak"
+        },
+        {
+          "number": "9",
+          "name": "Denis Matys"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Physique Rookie",
+          "rosterCategory": "Men's Physique Rookie",
+          "competitors": [
+            {
+              "number": "6",
+              "name": "Marian Kasaj"
+            },
+            {
+              "number": "7",
+              "name": "Dominik Svoboda"
+            },
+            {
+              "number": "8",
+              "name": "Tomasz Sadlak"
+            },
+            {
+              "number": "9",
+              "name": "Denis Matys"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "4",
+      "name": "Ms. Wellness Open",
+      "count": 1,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "5",
+          "name": "Kateřina Gammelová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Wellness Open",
+          "rosterCategory": "Ms Wellness Open",
+          "competitors": [
+            {
+              "number": "5",
+              "name": "Kateřina Gammelová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "5",
+      "name": "Men´s Physique Novice",
+      "count": 5,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "8",
+          "name": "Tomasz Sadlak"
+        },
+        {
+          "number": "9",
+          "name": "Denis Matys"
+        },
+        {
+          "number": "11",
+          "name": "Marek Vanda"
+        },
+        {
+          "number": "12",
+          "name": "Michal Šimáček"
+        },
+        {
+          "number": "28",
+          "name": "Jonáš Pígl"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Physique Novice",
+          "rosterCategory": "Men's Physique Novice",
+          "competitors": [
+            {
+              "number": "8",
+              "name": "Tomasz Sadlak"
+            },
+            {
+              "number": "9",
+              "name": "Denis Matys"
+            },
+            {
+              "number": "11",
+              "name": "Marek Vanda"
+            },
+            {
+              "number": "12",
+              "name": "Michal Šimáček"
+            },
+            {
+              "number": "28",
+              "name": "Jonáš Pígl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "6",
+      "name": "Ms. Bikini Model 15-18 + Ms. Bikini Model Juniors -23",
+      "count": 5,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "10",
+          "name": "Eliška Šenkeříková"
+        },
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "15",
+          "name": "Nela Černostová"
+        },
+        {
+          "number": "16",
+          "name": "Marija Stanislavska"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Bikini Model 15-18",
+          "rosterCategory": "Ms Bikini Teenage",
+          "competitors": [
+            {
+              "number": "10",
+              "name": "Eliška Šenkeříková"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Bikini Model Juniors -23",
+          "rosterCategory": "Ms Bikini 23",
+          "competitors": [
+            {
+              "number": "10",
+              "name": "Eliška Šenkeříková"
+            },
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "15",
+              "name": "Nela Černostová"
+            },
+            {
+              "number": "16",
+              "name": "Marija Stanislavska"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "7",
+      "name": "Men´s Physique Open",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "8",
+          "name": "Tomasz Sadlak"
+        },
+        {
+          "number": "9",
+          "name": "Denis Matys"
+        },
+        {
+          "number": "12",
+          "name": "Michal Šimáček"
+        },
+        {
+          "number": "17",
+          "name": "Tomáš Werner"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Physique Open",
+          "rosterCategory": "Men's Physique Open",
+          "competitors": [
+            {
+              "number": "8",
+              "name": "Tomasz Sadlak"
+            },
+            {
+              "number": "9",
+              "name": "Denis Matys"
+            },
+            {
+              "number": "12",
+              "name": "Michal Šimáček"
+            },
+            {
+              "number": "17",
+              "name": "Tomáš Werner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "MEN´S PHYSIQUE O",
+      "name": "MEN´S PHYSIQUE – ABSOLUTNÍ VÍTĚZ",
+      "count": 0,
+      "overall": true,
+      "competitors": [],
+      "groups": []
+    },
+    {
+      "n": "8",
+      "name": "Ms. Bikini Model Rookie",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "5",
+          "name": "Kateřina Gammelová"
+        },
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "18",
+          "name": "Monika Schwarczová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Bikini Model Rookie",
+          "rosterCategory": "Ms Bikini Rookie",
+          "competitors": [
+            {
+              "number": "5",
+              "name": "Kateřina Gammelová"
+            },
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "18",
+              "name": "Monika Schwarczová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "9",
+      "name": "Men´s Athletic -3kg + Men´s Athletic -6kg",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "6",
+          "name": "Marian Kasaj"
+        },
+        {
+          "number": "20",
+          "name": "Adam Komínek"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Athletic -3kg",
+          "rosterCategory": "Men's Athletic HW-3",
+          "competitors": [
+            {
+              "number": "6",
+              "name": "Marian Kasaj"
+            },
+            {
+              "number": "20",
+              "name": "Adam Komínek"
+            }
+          ]
+        },
+        {
+          "name": "Men´s Athletic -6kg",
+          "rosterCategory": "Men's Athletic HW-6",
+          "competitors": [
+            {
+              "number": "6",
+              "name": "Marian Kasaj"
+            },
+            {
+              "number": "20",
+              "name": "Adam Komínek"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "10",
+      "name": "Ms. Bikini Model Novice",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "5",
+          "name": "Kateřina Gammelová"
+        },
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "16",
+          "name": "Marija Stanislavska"
+        },
+        {
+          "number": "19",
+          "name": "Kateřina Kunštová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Bikini Model Novice",
+          "rosterCategory": "Ms Bikini Novice",
+          "competitors": [
+            {
+              "number": "5",
+              "name": "Kateřina Gammelová"
+            },
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "16",
+              "name": "Marija Stanislavska"
+            },
+            {
+              "number": "19",
+              "name": "Kateřina Kunštová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "11",
+      "name": "Men´s Classic Physique Juniors -23",
+      "count": 5,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "21",
+          "name": "Béla Toth"
+        },
+        {
+          "number": "22",
+          "name": "Josef Musil"
+        },
+        {
+          "number": "23",
+          "name": "Daniel Havelka"
+        },
+        {
+          "number": "24",
+          "name": "Ondřej Zetek"
+        },
+        {
+          "number": "25",
+          "name": "Alex Kopiecki"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Classic Physique Juniors -23",
+          "rosterCategory": "Men's Classic Physique 23",
+          "competitors": [
+            {
+              "number": "21",
+              "name": "Béla Toth"
+            },
+            {
+              "number": "22",
+              "name": "Josef Musil"
+            },
+            {
+              "number": "23",
+              "name": "Daniel Havelka"
+            },
+            {
+              "number": "24",
+              "name": "Ondřej Zetek"
+            },
+            {
+              "number": "25",
+              "name": "Alex Kopiecki"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "12",
+      "name": "Ms. Bikini Model Open",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "5",
+          "name": "Kateřina Gammelová"
+        },
+        {
+          "number": "15",
+          "name": "Nela Černostová"
+        },
+        {
+          "number": "19",
+          "name": "Kateřina Kunštová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Bikini Model Open",
+          "rosterCategory": "Ms Bikini Open",
+          "competitors": [
+            {
+              "number": "5",
+              "name": "Kateřina Gammelová"
+            },
+            {
+              "number": "15",
+              "name": "Nela Černostová"
+            },
+            {
+              "number": "19",
+              "name": "Kateřina Kunštová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "13",
+      "name": "Men´s Classic Physique Rookie",
+      "count": 6,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "17",
+          "name": "Tomáš Werner"
+        },
+        {
+          "number": "23",
+          "name": "Daniel Havelka"
+        },
+        {
+          "number": "24",
+          "name": "Ondřej Zetek"
+        },
+        {
+          "number": "25",
+          "name": "Alex Kopiecki"
+        },
+        {
+          "number": "27",
+          "name": "BartŁomiej Pobielajew"
+        },
+        {
+          "number": "28",
+          "name": "Jonáš Pígl"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Classic Physique Rookie",
+          "rosterCategory": "Men's Classic Physique Rookie",
+          "competitors": [
+            {
+              "number": "17",
+              "name": "Tomáš Werner"
+            },
+            {
+              "number": "23",
+              "name": "Daniel Havelka"
+            },
+            {
+              "number": "24",
+              "name": "Ondřej Zetek"
+            },
+            {
+              "number": "25",
+              "name": "Alex Kopiecki"
+            },
+            {
+              "number": "27",
+              "name": "BartŁomiej Pobielajew"
+            },
+            {
+              "number": "28",
+              "name": "Jonáš Pígl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "14",
+      "name": "Ms. Bikini Model 40+",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "18",
+          "name": "Monika Schwarczová"
+        },
+        {
+          "number": "19",
+          "name": "Kateřina Kunštová"
+        },
+        {
+          "number": "26",
+          "name": "Karolína Semecká"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Bikini Model 40",
+          "rosterCategory": "Ms Bikini 40+",
+          "competitors": [
+            {
+              "number": "18",
+              "name": "Monika Schwarczová"
+            },
+            {
+              "number": "19",
+              "name": "Kateřina Kunštová"
+            },
+            {
+              "number": "26",
+              "name": "Karolína Semecká"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "15",
+      "name": "Men´s Classic Physique Novice",
+      "count": 6,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "22",
+          "name": "Josef Musil"
+        },
+        {
+          "number": "24",
+          "name": "Ondřej Zetek"
+        },
+        {
+          "number": "27",
+          "name": "BartŁomiej Pobielajew"
+        },
+        {
+          "number": "30",
+          "name": "Richie Czabala"
+        },
+        {
+          "number": "31",
+          "name": "Radek Chlapec"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Classic Physique Novice",
+          "rosterCategory": "Men's Classic Physique Novice",
+          "competitors": [
+            {
+              "number": "22",
+              "name": "Josef Musil"
+            },
+            {
+              "number": "24",
+              "name": "Ondřej Zetek"
+            },
+            {
+              "number": "27",
+              "name": "BartŁomiej Pobielajew"
+            },
+            {
+              "number": "30",
+              "name": "Richie Czabala"
+            },
+            {
+              "number": "31",
+              "name": "Radek Chlapec"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "MS. BIKINI MODEL O",
+      "name": "MS. BIKINI MODEL – ABSOLUTNÍ VÍTĚZ",
+      "count": 0,
+      "overall": true,
+      "competitors": [],
+      "groups": []
+    },
+    {
+      "n": "16",
+      "name": "Men´s Classic Physique Open",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "17",
+          "name": "Tomáš Werner"
+        },
+        {
+          "number": "22",
+          "name": "Josef Musil"
+        },
+        {
+          "number": "27",
+          "name": "BartŁomiej Pobielajew"
+        },
+        {
+          "number": "31",
+          "name": "Radek Chlapec"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Classic Physique Open",
+          "rosterCategory": "Men's Classic Physique Open",
+          "competitors": [
+            {
+              "number": "17",
+              "name": "Tomáš Werner"
+            },
+            {
+              "number": "22",
+              "name": "Josef Musil"
+            },
+            {
+              "number": "27",
+              "name": "BartŁomiej Pobielajew"
+            },
+            {
+              "number": "31",
+              "name": "Radek Chlapec"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "17",
+      "name": "Ms. Fitness Model Novice + Ms. Fitness Model Open",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "29",
+          "name": "Martina Novotná"
+        },
+        {
+          "number": "36",
+          "name": "Radka Čejková"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Fitness Model Novice",
+          "rosterCategory": "Ms FitnessModel Novice",
+          "competitors": [
+            {
+              "number": "29",
+              "name": "Martina Novotná"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Fitness Model Open",
+          "rosterCategory": "Ms FitnessModel Open",
+          "competitors": [
+            {
+              "number": "29",
+              "name": "Martina Novotná"
+            },
+            {
+              "number": "36",
+              "name": "Radka Čejková"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "MEN´S CLASSIC PHYSIQUE O",
+      "name": "MEN´S CLASSIC PHYSIQUE – ABSOLUTNÍ VÍTĚZ",
+      "count": 0,
+      "overall": true,
+      "competitors": [],
+      "groups": []
+    },
+    {
+      "n": "18",
+      "name": "Ms. Sport Model Novice",
+      "count": 2,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "4",
+          "name": "Martina Durnová"
+        },
+        {
+          "number": "32",
+          "name": "Lucie Kinc"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Sport Model Novice",
+          "rosterCategory": "Ms Sports Model Novice",
+          "competitors": [
+            {
+              "number": "4",
+              "name": "Martina Durnová"
+            },
+            {
+              "number": "32",
+              "name": "Lucie Kinc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "19",
+      "name": "Men´s Bodybuilding 40+",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "33",
+          "name": "Ivo Miler"
+        },
+        {
+          "number": "34",
+          "name": "Vladislav Růžička"
+        },
+        {
+          "number": "35",
+          "name": "Roman Kawulok"
+        },
+        {
+          "number": "2",
+          "name": "Samuel Čaník"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Bodybuilding 40",
+          "rosterCategory": "Men's Bodybuilding 40+",
+          "competitors": [
+            {
+              "number": "33",
+              "name": "Ivo Miler"
+            },
+            {
+              "number": "34",
+              "name": "Vladislav Růžička"
+            },
+            {
+              "number": "35",
+              "name": "Roman Kawulok"
+            }
+          ]
+        },
+        {
+          "name": "",
+          "rosterCategory": "Men's Physique Teenage",
+          "competitors": [
+            {
+              "number": "2",
+              "name": "Samuel Čaník"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "20",
+      "name": "Ms. Sport Model Open+ Ms. Sport Model 40+",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "4",
+          "name": "Martina Durnová"
+        },
+        {
+          "number": "36",
+          "name": "Radka Čejková"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Sport Model Open",
+          "rosterCategory": "Ms Sports Model Open",
+          "competitors": [
+            {
+              "number": "4",
+              "name": "Martina Durnová"
+            },
+            {
+              "number": "36",
+              "name": "Radka Čejková"
+            }
+          ]
+        },
+        {
+          "name": "Ms. Sport Model 40",
+          "rosterCategory": "Ms Sports Model 40+",
+          "competitors": [
+            {
+              "number": "4",
+              "name": "Martina Durnová"
+            },
+            {
+              "number": "36",
+              "name": "Radka Čejková"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "21",
+      "name": "Men´s Bodybuilding 15-18 + Men´s Bodybuilding Juniors -23",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "2",
+          "name": "Samuel Čaník"
+        },
+        {
+          "number": "37",
+          "name": "Lukáš Skupien"
+        },
+        {
+          "number": "38",
+          "name": "David Vavrys"
+        },
+        {
+          "number": "22",
+          "name": "Josef Musil"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Bodybuilding 15-18",
+          "rosterCategory": "Men's Bodybuilding Teenage",
+          "competitors": [
+            {
+              "number": "2",
+              "name": "Samuel Čaník"
+            },
+            {
+              "number": "37",
+              "name": "Lukáš Skupien"
+            },
+            {
+              "number": "38",
+              "name": "David Vavrys"
+            }
+          ]
+        },
+        {
+          "name": "Men´s Bodybuilding Juniors -23",
+          "rosterCategory": "Men's Bodybuilding 23",
+          "competitors": [
+            {
+              "number": "22",
+              "name": "Josef Musil"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "22",
+      "name": "Ms. Swimsuit Open",
+      "count": 3,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "18",
+          "name": "Monika Schwarczová"
+        },
+        {
+          "number": "26",
+          "name": "Karolína Semecká"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Swimsuit Open",
+          "rosterCategory": "Ms Swimsuit Open",
+          "competitors": [
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "18",
+              "name": "Monika Schwarczová"
+            },
+            {
+              "number": "26",
+              "name": "Karolína Semecká"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "23",
+      "name": "Men´s Bodybuilding Rookie",
+      "count": 6,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "20",
+          "name": "Adam Komínek"
+        },
+        {
+          "number": "30",
+          "name": "Richie Czabala"
+        },
+        {
+          "number": "37",
+          "name": "Lukáš Skupien"
+        },
+        {
+          "number": "38",
+          "name": "David Vavrys"
+        },
+        {
+          "number": "39",
+          "name": "Dominik Jansa"
+        },
+        {
+          "number": "40",
+          "name": "Daniel Svatoň"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Bodybuilding Rookie",
+          "rosterCategory": "Men's Bodybuilding Rookie",
+          "competitors": [
+            {
+              "number": "20",
+              "name": "Adam Komínek"
+            },
+            {
+              "number": "30",
+              "name": "Richie Czabala"
+            },
+            {
+              "number": "37",
+              "name": "Lukáš Skupien"
+            },
+            {
+              "number": "38",
+              "name": "David Vavrys"
+            },
+            {
+              "number": "39",
+              "name": "Dominik Jansa"
+            },
+            {
+              "number": "40",
+              "name": "Daniel Svatoň"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "24",
+      "name": "Ms. Gym Model",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "13",
+          "name": "Klára Pazderová"
+        },
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "32",
+          "name": "Lucie Kinc"
+        },
+        {
+          "number": "41",
+          "name": "Kristýna Dubcová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Gym Model",
+          "rosterCategory": "Ms Gym Model",
+          "competitors": [
+            {
+              "number": "13",
+              "name": "Klára Pazderová"
+            },
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "32",
+              "name": "Lucie Kinc"
+            },
+            {
+              "number": "41",
+              "name": "Kristýna Dubcová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "25",
+      "name": "Men´s Bodybuilding Novice",
+      "count": 6,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "11",
+          "name": "Marek Vanda"
+        },
+        {
+          "number": "22",
+          "name": "Josef Musil"
+        },
+        {
+          "number": "30",
+          "name": "Richie Czabala"
+        },
+        {
+          "number": "35",
+          "name": "Roman Kawulok"
+        },
+        {
+          "number": "39",
+          "name": "Dominik Jansa"
+        },
+        {
+          "number": "40",
+          "name": "Daniel Svatoň"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Bodybuilding Novice",
+          "rosterCategory": "Men's Bodybuilding Novice",
+          "competitors": [
+            {
+              "number": "11",
+              "name": "Marek Vanda"
+            },
+            {
+              "number": "22",
+              "name": "Josef Musil"
+            },
+            {
+              "number": "30",
+              "name": "Richie Czabala"
+            },
+            {
+              "number": "35",
+              "name": "Roman Kawulok"
+            },
+            {
+              "number": "39",
+              "name": "Dominik Jansa"
+            },
+            {
+              "number": "40",
+              "name": "Daniel Svatoň"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "26",
+      "name": "Ms. Runway",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "13",
+          "name": "Klára Pazderová"
+        },
+        {
+          "number": "14",
+          "name": "Markéta Jílková"
+        },
+        {
+          "number": "18",
+          "name": "Monika Schwarczová"
+        },
+        {
+          "number": "41",
+          "name": "Kristýna Dubcová"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Ms. Runway",
+          "rosterCategory": "Ms Runway",
+          "competitors": [
+            {
+              "number": "13",
+              "name": "Klára Pazderová"
+            },
+            {
+              "number": "14",
+              "name": "Markéta Jílková"
+            },
+            {
+              "number": "18",
+              "name": "Monika Schwarczová"
+            },
+            {
+              "number": "41",
+              "name": "Kristýna Dubcová"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "27",
+      "name": "Men´s Bodybuilding Open",
+      "count": 4,
+      "overall": false,
+      "competitors": [
+        {
+          "number": "30",
+          "name": "Richie Czabala"
+        },
+        {
+          "number": "33",
+          "name": "Ivo Miler"
+        },
+        {
+          "number": "34",
+          "name": "Vladislav Růžička"
+        },
+        {
+          "number": "39",
+          "name": "Dominik Jansa"
+        }
+      ],
+      "groups": [
+        {
+          "name": "Men´s Bodybuilding Open",
+          "rosterCategory": "Men's Bodybuilding Open",
+          "competitors": [
+            {
+              "number": "30",
+              "name": "Richie Czabala"
+            },
+            {
+              "number": "33",
+              "name": "Ivo Miler"
+            },
+            {
+              "number": "34",
+              "name": "Vladislav Růžička"
+            },
+            {
+              "number": "39",
+              "name": "Dominik Jansa"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "MEN´S BODYBUILDING O",
+      "name": "MEN´S BODYBUILDING – ABSOLUTNÍ VÍTĚZ",
+      "count": 0,
+      "overall": true,
+      "competitors": [],
+      "groups": []
+    }
+  ]
+}
