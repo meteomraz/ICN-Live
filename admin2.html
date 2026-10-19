@@ -25,6 +25,20 @@
 <style>
 :root{--bg:#050814;--card:#101827;--line:#273449;--text:#f8fafc;--muted:#9ca3af;--gold:#facc15;--green:#22c55e;--lime:#84cc16;--blue:#38bdf8;--red:#ef4444}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#172554 0,#050814 45%,#020617 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}.wrap{max-width:1180px;margin:auto;padding:14px}header{text-align:center;padding:12px 0 8px}.logo{font-size:64px;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:.9}h1{margin:8px 0 4px;font-size:26px}.sub,.muted{color:var(--muted)}.muted{font-size:14px;margin-top:6px}.small{font-size:12px;color:#cbd5e1}.cards{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}.card{background:rgba(16,24,39,.94);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.28);margin-bottom:12px}.label{font-weight:800;color:var(--gold);font-size:14px}.big{font-weight:900;font-size:19px;margin-top:5px}.list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}.row{background:rgba(16,24,39,.9);border:1px solid var(--line);border-radius:15px;padding:11px;display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:start}.time{font-weight:900;color:var(--gold);font-size:18px}.name{font-weight:800}.meta{font-size:13px;color:var(--muted);margin-top:4px}.current{border-color:var(--lime);background:rgba(132,204,22,.18)}.next{border-color:var(--blue);background:rgba(56,189,248,.13)}.overall{border-color:var(--green);background:rgba(34,197,94,.13)}.tag{font-size:11px;font-weight:900;border-radius:999px;padding:4px 7px;background:var(--lime);color:#102a0b}.tagNext{background:var(--blue);color:#062434}.tagOverall{background:var(--green);color:#052e16}.legend{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 22px}.adminLink{text-align:center;margin:10px 0}.adminLink a{color:#94a3b8;text-decoration:none;font-size:12px}select,input,button,textarea{border-radius:12px;border:1px solid #475569;background:#0f172a;color:white;padding:10px;font-size:15px;width:100%}button{background:var(--gold);color:#111827;font-weight:900;border:none;cursor:pointer}.secondary{background:#1e293b;color:white;border:1px solid #475569}.danger{background:var(--red);color:white}.ok{background:var(--green);color:#052e16}.blue{background:var(--blue);color:#062434}.grid,.grid2,.grid4{display:grid;grid-template-columns:1fr;gap:8px}.grid2{grid-template-columns:1fr 1fr}.hidden{display:none!important}.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:10px}table{width:100%;border-collapse:collapse;min-width:820px;table-layout:fixed}th,td{border-bottom:1px solid #263244;padding:8px;text-align:left;font-size:13px}th{background:#111827;color:var(--gold)}td input{padding:6px;border-radius:8px;font-size:13px}.col-num{width:72px}.col-name{width:auto}.col-count{width:110px}.col-overall{width:86px}.col-gold-a{width:105px}.goldA{color:#facc15;font-weight:900;white-space:nowrap}.col-duration{width:90px}.durationValue{display:inline-block;width:100%;padding:7px 8px;border-radius:8px;background:#111827;border:1px solid #334155;color:#cbd5e1;text-align:center;font-weight:800}.history{display:grid;gap:6px;margin-top:10px}.histItem{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:8px;font-size:13px}.qrBox{display:flex;align-items:center;justify-content:center;background:white;padding:12px;border-radius:16px;margin-top:10px}@media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}.list{grid-template-columns:1fr 1fr}.grid{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(4,1fr)}.logo{font-size:76px}}
+
+/* Mobilní rychlá navigace záložní administrace */
+#icnJumpDock{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:9999;display:none;align-items:flex-end;flex-direction:column;gap:9px;font-family:inherit}
+#icnJumpDock.is-visible{display:flex}
+#icnJumpToggle{width:54px;height:54px;min-width:54px;border:1px solid #e0b95a;border-radius:50%;background:#111827;color:#f9d777;font-size:24px;box-shadow:0 6px 24px #0009;cursor:pointer;padding:0}
+#icnJumpMenu{width:min(290px,calc(100vw - 32px));max-height:min(66vh,520px);overflow-y:auto;overscroll-behavior:contain;background:#101827;border:1px solid #a88638;border-radius:15px;box-shadow:0 12px 36px #000a;padding:10px}
+#icnJumpMenu[hidden]{display:none}
+#icnJumpMenu .icnJumpTitle{color:#f9d777;font-weight:700;padding:8px 10px}
+#icnJumpMenu button{display:block;width:100%;min-height:43px;text-align:left;margin:2px 0;padding:10px 12px;border:0;border-radius:9px;background:transparent;color:#e5e7eb;font-size:14px;cursor:pointer}
+#icnJumpMenu button[aria-current="location"]{background:#334155;color:#f9d777;font-weight:700}
+#icnJumpMenu button:focus-visible,#icnJumpToggle:focus-visible{outline:2px solid #f9d777;outline-offset:2px}
+.icnJumpTarget{scroll-margin-top:18px}
+@media(min-width:900px){#icnJumpDock{right:22px;bottom:24px}}
+
 </style></head><body><div class="wrap"><header><div class="logo">ICN</div><h1 id="pageTitle">LIVE harmonogram</h1><div class="sub" id="pageSub"></div></header>
 <div id="connectionStatus" class="card" role="status">Připojování k živému harmonogramu…</div>
 <div id="publicView" class="hidden"><div class="cards"><div class="card"><div class="label">🟢 Právě probíhá</div><div class="big" id="currentBox">–</div><div class="muted" id="currentEnd">–</div></div><div class="card"><div class="label" style="color:var(--blue)">🔵 Následuje další kategorie</div><div class="big" id="nextCategory">–</div><div class="muted" id="nextCountdown">–</div></div><div class="card"><div class="label" style="color:var(--green)">🏆 Konec soutěže</div><div class="big" id="finish">–</div><div class="muted" id="updated">–</div></div></div><div class="list" id="list"></div><div class="legend">Limetkově = právě probíhá • modře = následující kategorie • zeleně = overall</div><div class="adminLink"><a href="?admin=1">Admin</a></div></div>
@@ -157,4 +171,50 @@ const prev=refreshAdminUI;refreshAdminUI=function(){prev();initAdmin();drawAdmin
 })();
 setupFirebase();
 </script>
+
+<script>
+/* Rychlá navigace – pouze admin2; bez zásahů do dat a Firebase. */
+(function(){
+  const panel=document.getElementById('adminPanel');
+  if(!panel)return;
+  const dock=document.createElement('nav');dock.id='icnJumpDock';dock.setAttribute('aria-label','Rychlá navigace administrací');
+  const menu=document.createElement('div');menu.id='icnJumpMenu';menu.hidden=true;
+  const title=document.createElement('div');title.className='icnJumpTitle';title.textContent='Přejít na sekci';menu.append(title);
+  const toggle=document.createElement('button');toggle.id='icnJumpToggle';toggle.type='button';toggle.textContent='☰';toggle.setAttribute('aria-label','Otevřít rychlou navigaci');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','icnJumpMenu');
+  dock.append(menu,toggle);document.body.append(dock);
+  const items=[
+    ['Živá synchronizace','Živá synchronizace'],
+    ['1) Import soutěže z Excelu','Import soutěže'],
+    ['2) Informace o soutěži','Informace o soutěži'],
+    ['3) Nastavení délky kategorií','Délky kategorií'],
+    ['4) Live řízení soutěže','Live řízení'],
+    ['Startovní listina podle podkategorií','Startovní listina'],
+    ['5) Náhled a ruční úpravy kategorií','Kategorie a úpravy'],
+    ['6) QR / export / import','Export a import']
+  ];
+  const targets=[];
+  function locate(label){return [...panel.querySelectorAll('.card .label')].find(el=>el.textContent.trim()===label)?.closest('.card')}
+  function updateItems(){
+    for(const [heading,name] of items){
+      const el=locate(heading);if(!el||targets.some(t=>t.el===el))continue;
+      el.classList.add('icnJumpTarget');const btn=document.createElement('button');btn.type='button';btn.textContent=name;
+      btn.addEventListener('click',()=>{el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});setOpen(false)});
+      const position=items.findIndex(x=>x[0]===heading);
+      const following=[...menu.querySelectorAll('button')].find(b=>items.findIndex(x=>x[1]===b.textContent)>position);
+      if(following)menu.insertBefore(btn,following);else menu.append(btn);
+      targets.push({el,btn});
+    }
+  }
+  function setOpen(open){menu.hidden=!open;toggle.textContent=open?'×':'☰';toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Zavřít rychlou navigaci':'Otevřít rychlou navigaci')}
+  toggle.addEventListener('click',()=>{updateItems();setOpen(menu.hidden)});
+  document.addEventListener('click',e=>{if(!dock.contains(e.target))setOpen(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+  let ticking=false;
+  function refresh(){ticking=false;const visible=!!(panel.getClientRects().length && !panel.classList.contains('hidden'));dock.classList.toggle('is-visible',visible);if(!visible){setOpen(false);return}updateItems();let selected=null;for(const t of targets){if(t.el.getBoundingClientRect().top<=innerHeight*.34)selected=t}selected??=targets[0];for(const t of targets){if(t===selected)t.btn.setAttribute('aria-current','location');else t.btn.removeAttribute('aria-current')}}
+  function schedule(){if(!ticking){ticking=true;requestAnimationFrame(refresh)}}
+  new MutationObserver(schedule).observe(panel,{attributes:true,attributeFilter:['class'],childList:true,subtree:true});
+  window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});schedule();
+})();
+</script>
+
 </body></html>
