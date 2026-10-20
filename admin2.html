@@ -48,7 +48,7 @@
 <div class="card"><div class="label">3) Nastavení délky kategorií</div><div class="grid4"><label><span class="small">1–3 závodníci</span><input id="ruleSmall" type="number" min="1"></label><label><span class="small">4–8 závodníků</span><input id="ruleMedium" type="number" min="1"></label><label><span class="small">9+ závodníků</span><input id="ruleLarge" type="number" min="1"></label><label><span class="small">Overall</span><input id="ruleOverall" type="number" min="1"></label></div><button id="applyRules" class="ok" style="margin-top:8px">Přepočítat délky</button></div>
 <div class="card"><div class="label">4) Live řízení soutěže</div><div class="grid"><select id="anchorSelect"></select><input id="anchorTime" type="time" step="60"><button id="nowBtn">Vybraná kategorie začíná TEĎ</button></div><div class="grid2" style="margin-top:8px"><button id="nextBtn" class="blue">Posunout na další kategorii TEĎ</button><button id="undoBtn" class="secondary">Vrátit poslední změnu</button></div></div>
 <div class="card"><div class="label">5) Náhled a ruční úpravy kategorií</div><div class="muted">Délka se mění tlačítkem „Přepočítat délky“.</div><div class="tableWrap"><table id="editTable"></table></div></div>
-<div class="card"><div class="label">6) QR / export / import</div><div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div><div id="qrBox" class="qrBox hidden"></div><textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea><div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div><div class="history" id="historyBox"></div></div><div class="list" id="adminList"></div></div></div></div>
+<div class="card"><div class="label">6) QR / export / import</div><div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div><div id="qrBox" class="qrBox hidden"></div><textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea><div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div><div class="history" id="historyBox"></div></div><div class="card" id="icnFinalScheduleSection"><div class="label">7) Finální harmonogram</div><div class="muted">Výsledný harmonogram kategorií podle aktuálních dat a nastavených časů.</div><div class="list" id="adminList"></div></div></div></div></div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -190,7 +190,8 @@ setupFirebase();
     ['4) Live řízení soutěže','Live řízení'],
     ['Startovní listina podle podkategorií','Startovní listina'],
     ['5) Náhled a ruční úpravy kategorií','Kategorie a úpravy'],
-    ['6) QR / export / import','Export a import']
+    ['6) QR / export / import','Export a import'],
+    ['7) Finální harmonogram','Finální harmonogram']
   ];
   const targets=[];
   function locate(label){return [...panel.querySelectorAll('.card .label')].find(el=>el.textContent.trim()===label)?.closest('.card')}
