@@ -52,8 +52,10 @@
 <div class="card" id="icnPdfRosterSection">
   <div class="label">8) Finální soupiska závodníků – PDF</div>
   <p class="muted">Profesionálně formátovaná soupiska všech kategorií a podkategorií včetně obsazení absolutek. Vychází z právě načtených dat soutěže.</p>
-  <button id="icnExportRosterPdf" class="ok" type="button">📄 Vygenerovat finální soupisku PDF</button>
-  <div class="muted" style="margin-top:8px">Otevře tiskový náhled. V telefonu vyber „Uložit jako PDF“.</div>
+  <button id="icnExportRosterPdf" class="ok" type="button">📄 Připravit soupisku k uložení do PDF</button>
+  <div id="icnPdfStatus" role="status" class="muted" style="margin-top:10px" aria-live="polite"></div>
+  <div id="icnPdfPreview" class="hidden" style="margin-top:12px"><button id="icnPrintRosterPdf" type="button" class="blue">🖨️ Uložit jako PDF / Tisk</button><iframe id="icnPdfFrame" title="Náhled finální soupisky" style="width:100%;height:65vh;min-height:420px;margin-top:10px;border:1px solid #b58b35;border-radius:8px;background:white"></iframe></div>
+  <div class="muted" style="margin-top:8px">Náhled se zobrazí přímo níže. Poté klepni na „Uložit jako PDF / Tisk“.</div>
 </div></div></div></div>
 <script>
 'use strict';
@@ -231,13 +233,19 @@ setupFirebase();
 (function(){
   const btn=document.getElementById('icnExportRosterPdf');
   if(!btn)return;
+  const status=document.getElementById('icnPdfStatus');
+  const preview=document.getElementById('icnPdfPreview');
+  const frame=document.getElementById('icnPdfFrame');
+  document.getElementById('icnPrintRosterPdf').addEventListener('click',()=>{try{frame.contentWindow.focus();frame.contentWindow.print()}catch(e){status.textContent='Tisk nelze otevřít: '+e.message}});
   function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   function fmtTime(v){return typeof v==='number'?toTime(v):String(v??'—')}
   btn.addEventListener('click',()=>{
-    if(typeof authenticated!=='undefined'&&!authenticated){alert('Nejdřív se přihlas do administrace.');return}
-    if(typeof remoteReady!=='undefined'&&!remoteReady){alert('Počkej na načtení dat z Firebase.');return}
+   try {
+    status.textContent='Připravuji aktuální soupisku…';
+    if(typeof authenticated!=='undefined'&&!authenticated){status.textContent='Nejdřív se přihlas do administrace.';return}
+    if(typeof remoteReady!=='undefined'&&!remoteReady){status.textContent='Počkej na načtení dat z Firebase.';return}
     const s=hydrate(loadState());
-    if(!s?.items?.length){alert('Nejsou načtené žádné kategorie.');return}
+    if(!s?.items?.length){status.textContent='Nejsou načtené žádné kategorie.';return}
     const rows=buildSchedule(s);
     const totalEntries=s.items.reduce((n,it)=>n+groupsFor(it).reduce((m,g)=>m+(g.competitors||[]).length,0),0);
     const groups=rows.map((it,i)=>{
@@ -287,9 +295,11 @@ th,td{padding:5px 9px;border-bottom:1px solid #e7e7e7}
 <div class="summary"><div><strong>${rows.length}</strong><div>Kategorií</div></div><div><strong>${totalEntries}</strong><div>Startů v kategoriích</div></div><div><strong>${rows.filter(x=>x.overall).length}</strong><div>Absolutních kategorií</div></div></div>
 <main>${groups}</main><footer class="footer">ICN LIVE • Vygenerováno ${esc(printed)} • Soupiska odpovídá stavu dat v okamžiku vytvoření.</footer>
 </body></html>`;
-    const w=window.open('','_blank');
-    if(!w){alert('Pro export PDF povol v prohlížeči otevírání nových oken.');return}
-    w.document.open();w.document.write(page);w.document.close();w.focus();
+    frame.srcdoc=page;
+    preview.classList.remove('hidden');
+    status.textContent='Náhled připraven. Pro uložení zvol „Uložit jako PDF / Tisk“ a v dialogu „Uložit jako PDF“.';
+   }catch(e){console.error('ICN PDF export',e);status.textContent='Nepodařilo se připravit PDF: '+(e?.message||String(e));}
+
   });
 })();
 </script>
