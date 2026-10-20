@@ -177,6 +177,13 @@ function drawAdmin(){const root=document.getElementById('icnRosterGroups');if(!r
 function initAdmin(){const panel=document.getElementById('adminPanel');if(!panel||document.getElementById('icnRosterGroups'))return;const card=document.createElement('div');card.className='card';card.innerHTML='<div class="label">Startovní listina podle podkategorií</div><p class="icnHelp">Kategorie spojené znakem + se zobrazují odděleně, ale mají společný čas. Přidání čísla automaticky doplní jméno. U absolutek přidávej postupující přes +.</p><button id="icnLoadSeed" class="secondary" type="button">Načíst připravenou startovku 2026</button><div id="icnRosterGroups"></div>';panel.insertBefore(card,document.getElementById('editTable').closest('.card'));document.getElementById('icnLoadSeed').onclick=()=>{if(!confirm('Nahradit startovní listinu připravenými daty 2026?'))return;const s=hydrate(loadState());s.roster=seed.roster;s.items.forEach(it=>{const src=seed.items.find(x=>String(x.n)===String(it.n));if(src){it.groups=JSON.parse(JSON.stringify(src.groups));it.competitors=JSON.parse(JSON.stringify(src.competitors));if(!it.overall)it.count=src.count}});saveState(s,'Nahrána startovní listina 2026');drawAdmin()};drawAdmin()}
 const prev=refreshAdminUI;refreshAdminUI=function(){prev();initAdmin();drawAdmin()};
 })();
+// Bezpečné rozhraní pro samostatný exportní modul (sekce 8).
+window.icnRosterExportApi = {
+  snapshot: () => hydrate(loadState()),
+  schedule: state => buildSchedule(state),
+  groups: item => groupsFor(item),
+  formatTime: minutes => toTime(minutes)
+};
 setupFirebase();
 </script>
 
@@ -238,18 +245,20 @@ setupFirebase();
   const frame=document.getElementById('icnPdfFrame');
   document.getElementById('icnPrintRosterPdf').addEventListener('click',()=>{try{frame.contentWindow.focus();frame.contentWindow.print()}catch(e){status.textContent='Tisk nelze otevřít: '+e.message}});
   function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-  function fmtTime(v){return typeof v==='number'?toTime(v):String(v??'—')}
+  function fmtTime(v){return typeof v==='number'?window.icnRosterExportApi.formatTime(v):String(v??'—')}
   btn.addEventListener('click',()=>{
    try {
     status.textContent='Připravuji aktuální soupisku…';
     if(typeof authenticated!=='undefined'&&!authenticated){status.textContent='Nejdřív se přihlas do administrace.';return}
     if(typeof remoteReady!=='undefined'&&!remoteReady){status.textContent='Počkej na načtení dat z Firebase.';return}
-    const s=hydrate(loadState());
+    const api=window.icnRosterExportApi;
+    if(!api){throw new Error('Exportní modul nebyl načten. Obnov stránku.')}
+    const s=api.snapshot();
     if(!s?.items?.length){status.textContent='Nejsou načtené žádné kategorie.';return}
-    const rows=buildSchedule(s);
-    const totalEntries=s.items.reduce((n,it)=>n+groupsFor(it).reduce((m,g)=>m+(g.competitors||[]).length,0),0);
+    const rows=api.schedule(s);
+    const totalEntries=s.items.reduce((n,it)=>n+api.groups(it).reduce((m,g)=>m+(g.competitors||[]).length,0),0);
     const groups=rows.map((it,i)=>{
-      const sub=groupsFor(it);
+      const sub=api.groups(it);
       const lines=sub.map(g=>{
         const people=g.competitors||[];
         const peopleRows=people.length?people.map((p,j)=>`<tr><td class="idx">${j+1}.</td><td class="bib">${esc(p.number)}</td><td>${esc(p.name)}</td></tr>`).join(''):'<tr><td colspan="3" class="empty">Zatím bez přihlášených závodníků</td></tr>';
