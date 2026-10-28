@@ -37,7 +37,17 @@
 <div class="card"><div class="label">3) Nastavení délky kategorií</div><div class="grid4"><label><span class="small">1–3 závodníci</span><input id="ruleSmall" type="number" min="1"></label><label><span class="small">4–8 závodníků</span><input id="ruleMedium" type="number" min="1"></label><label><span class="small">9+ závodníků</span><input id="ruleLarge" type="number" min="1"></label><label><span class="small">Overall</span><input id="ruleOverall" type="number" min="1"></label></div><button id="applyRules" class="ok" style="margin-top:8px">Přepočítat délky</button></div>
 <div class="card"><div class="label">4) Live řízení soutěže</div><div class="grid"><select id="anchorSelect"></select><input id="anchorTime" type="time" step="60"><button id="nowBtn">Vybraná kategorie začíná TEĎ</button></div><div class="grid2" style="margin-top:8px"><button id="nextBtn" class="blue">Posunout na další kategorii TEĎ</button><button id="undoBtn" class="secondary">Vrátit poslední změnu</button></div></div>
 <div class="card"><div class="label">5) Náhled a ruční úpravy kategorií</div><div class="muted">Délka se mění tlačítkem „Přepočítat délky“.</div><div class="tableWrap"><table id="editTable"></table></div></div>
-<div class="card"><div class="label">6) QR / export / import</div><div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div><div id="qrBox" class="qrBox hidden"></div><textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea><div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div><div class="history" id="historyBox"></div></div><div class="list" id="adminList"></div></div></div></div>
+<div class="card"><div class="label">6) QR / export / import</div><div class="grid2"><button id="qrBtn" class="blue">Vygenerovat QR veřejné stránky</button><button id="exportBtn" class="secondary">Export JSON</button></div><div id="qrBox" class="qrBox hidden"></div><textarea id="jsonBox" rows="5" placeholder="JSON pro přenos nastavení"></textarea><div class="grid2" style="margin-top:8px"><button id="importBtn" class="secondary">Import JSON</button><button id="resetBtn" class="danger">Reset</button></div><div class="history" id="historyBox"></div></div><div class="card" id="icnFinalScheduleSection" aria-labelledby="icnFinalScheduleTitle">
+  <div class="label" id="icnFinalScheduleTitle">7) Finální harmonogram</div>
+  <div class="muted">Samostatný výsledný harmonogram podle aktuálních dat z Firebase. Časy se přepočítávají po každé změně v administraci.</div>
+  <div class="small" id="icnFinalScheduleSummary" role="status" style="margin-top:10px"></div>
+  <div class="list" id="icnFinalScheduleList"></div>
+</div>
+<div class="card">
+  <div class="label">Pracovní náhled kategorií</div>
+  <div class="muted">Náhled pro administrátora; finální harmonogram je v samostatné sekci výše.</div>
+  <div class="list" id="adminList"></div>
+</div></div></div></div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -162,7 +172,25 @@ if(!isAdminPage){setInterval(()=>{if(remoteReady)renderPublic()},30000)}else{$('
 function initAdmin(){const sel=$('anchorSelect');function rebuildSelect(s){sel.replaceChildren();s.items.forEach((x,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${x.n}) ${x.name}`;sel.append(o)})}
 function fillAdmin(){const s=loadState();rebuildSelect(s);sel.value=String(s.anchorIndex);$('anchorTime').value=s.anchorTime;$('competitionStart').value=s.competitionStart;$('eventName').value=s.event.name||'';$('eventDate').value=s.event.date||'';$('eventPlace').value=s.event.place||'';for(const k of ['Small','Medium','Large','Overall'])$('rule'+k).value=s.rules[k.toLowerCase()];renderEditTable(s);renderHistory(s);renderHeader()}
 function saveFromAdmin(log){previousState=loadState();const s=loadState();s.anchorIndex=Number(sel.value)||0;s.anchorTime=$('anchorTime').value||s.anchorTime;s.competitionStart=$('competitionStart').value||s.competitionStart;s.event={name:$('eventName').value.trim(),date:$('eventDate').value.trim(),place:$('eventPlace').value.trim()};for(const k of ['Small','Medium','Large','Overall']){const v=Number($('rule'+k).value);if(!Number.isFinite(v)||v<1)throw Error('Neplatná délka kategorie');s.rules[k.toLowerCase()]=v}saveState(s,log);return s}
-function renderAdmin(){const s=loadState(),arr=buildSchedule(s);renderList(arr,'adminList',true,(x,i)=>{previousState=loadState();const st=loadState();st.anchorIndex=i;st.anchorTime=toTime(x.start);saveState(st,`${toTime(x.start)} - nastaveno: ${x.name}`);fillAdmin();renderAdmin()});renderEditTable(s);renderHistory(s);renderHeader()}
+function renderFinalSchedule(){
+  const section=$('icnFinalScheduleSection');
+  if(!section)return;
+  const state=loadState();
+  const arr=buildSchedule(state);
+  const summary=$('icnFinalScheduleSummary');
+  if(!arr.length){
+    $('icnFinalScheduleList').replaceChildren();
+    summary.textContent='Zatím nejsou načtené žádné kategorie.';
+    return;
+  }
+  const count=arr.filter(x=>!x.overall).length;
+  const overall=arr.length-count;
+  summary.textContent=`${state.event?.name||'Soutěž'} • ${count} kategorií + ${overall} overall • start ${toTime(arr[0].start)} • konec ${toTime(arr[arr.length-1].end)}`;
+  // Používáme stejný výpočet a vykreslení jako veřejný harmonogram.
+  // Samostatný výpis nemá ovládací prvky měnící stav soutěže.
+  renderList(arr,'icnFinalScheduleList',false);
+}
+function renderAdmin(){const s=loadState(),arr=buildSchedule(s);renderList(arr,'adminList',true,(x,i)=>{previousState=loadState();const st=loadState();st.anchorIndex=i;st.anchorTime=toTime(x.start);saveState(st,`${toTime(x.start)} - nastaveno: ${x.name}`);fillAdmin();renderAdmin()});renderEditTable(s);renderHistory(s);renderHeader();renderFinalSchedule()}
 function renderEditTable(s){const t=$('editTable');t.innerHTML='<colgroup><col class="col-num"><col class="col-name"><col class="col-count"><col class="col-overall"><col class="col-gold-a"><col class="col-duration"></colgroup><tr><th>#</th><th>Název</th><th>Počet</th><th>Typ overall</th><th>Absolutka (A)</th><th>Délka</th></tr>';s.items.forEach((it,i)=>{const tr=document.createElement('tr');for(const [field,type,value] of [['n','text',it.n],['name','text',it.name],['count','number',it.count],['overall','checkbox',it.overall],['goldA','checkbox',it.goldA]]){const td=document.createElement('td'),input=document.createElement('input');input.dataset.i=i;input.dataset.f=field;input.type=type;if(type==='checkbox')input.checked=Boolean(value);else input.value=value;input.onchange=()=>{previousState=loadState();const st=loadState(),v=(field==='overall'||field==='goldA')?input.checked:field==='count'?Number(input.value):input.value;if(field==='count'&&st.items[i].countSource==='startovka'){alert('Počet se řídí počtem jmen ve startovce.');fillAdmin();return}st.items[i][field]=v;saveState(st);fillAdmin();renderAdmin()};td.append(input);tr.append(td)}const td=document.createElement('td'),span=document.createElement('span');span.className='durationValue';span.textContent=it.duration+' min';td.append(span);tr.append(td);t.append(tr)})}
 refreshAdminUI=()=>{fillAdmin();renderAdmin()};
 function renderHistory(s){const root=$('historyBox');root.replaceChildren();for(const h of(s.history||[]).slice(0,10)){const el=document.createElement('div');el.className='histItem';el.textContent=`${h.time} — ${h.text}`;root.append(el)}if(!root.childNodes.length)root.textContent='Zatím žádná historie.'}
